@@ -12,17 +12,11 @@
 # # # for more details. If you did not receive the license, for more information see:
 # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
 
-# @ Please identify and update all instances of "@" found in this script appropriately.
-# @ You will need to generate one or more test scripts that test your
-# @ complete functionality, @(these scripts provide example geoips calls and
-# @ sample output, as well as providing a full integration test),
-# @ and call each script within the test_all.sh script.
-
 # Do not rename this script or test directory - automated integration
 # tests look for the tests/test_all.sh script for complete testing.
 
 # This should contain test calls to cover ALL required functionality tests
-# for this repo.
+# for the GeoColor repo.
 
 # The $GEOIPS_PACKAGES_DIR/geoips tests modules sourced within this script handle:
    # setting up the appropriate associative arrays for tracking the overall
@@ -40,30 +34,29 @@ if [[ ! -d $GEOIPS_PACKAGES_DIR/geoips ]]; then
     exit 1
 fi
 
-repopath=`dirname $0`/../
+# The following script is used to generate all test geocolor products from abi and ahi.
+   # abi.sh: one TC case from abi
+   # abi.sh: one TC case from ahi
+   # abi_global.sh: global coverage with only one full goes17 coverage
+   # goes_east.sh: one full goes_east abi coverage (GOES-EAST)
+   # goes_west.sh: one full goes_west abi coverage (GOES-WEST)
 
-# @ Set the name of your package, for use in build_docs.sh and test_all_pre.sh, ie:
-# pkgname=@package@
-pkgname=my_package
-. $GEOIPS_PACKAGES_DIR/geoips/tests/utils/test_all_pre.sh $pkgname
-
-# @ NOTE: Update "template_basic_plugin" paths below to point to your package's
-# @ test scripts, ie
-# @   $GEOIPS_PACKAGES_DIR/template_basic_plugin -> $GEOIPS_PACKAGES_DIR/@package@
+. $GEOIPS/tests/utils/test_all_pre.sh geocolor
 
 echo ""
 # Note you must use the variable "call" in the for the loop
 # "call" used in test_all_run.sh
 
 for call in \
-\
-  "$GEOIPS_PACKAGES_DIR/geoips/tests/utils/check_code.sh all $repopath" \
-  "$GEOIPS_PACKAGES_DIR/geoips/docs/build_docs.sh $repopath $pkgname html_only" \
-  "$GEOIPS_PACKAGES_DIR/template_basic_plugin/tests/scripts/test_config.sh" \
-  "$GEOIPS_PACKAGES_DIR/template_basic_plugin/tests/scripts/amsr2.global_clean.89-PCT-Using-Product-Defaults.sh" \
-  "$GEOIPS_PACKAGES_DIR/template_basic_plugin/tests/scripts/amsr2.tc_clean.89-PCT-Fully-Specified.sh"
+    "$GEOIPS_PACKAGES_DIR/geoips/tests/utils/check_code.sh all `dirname $0`/../" \
+    "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi.sh" \
+    "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/ahi.sh" \
+    "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_global.sh" \
+    "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_east.sh" \
+    "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_west.sh" \
+    "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/himawari.sh"
 do
-    . $GEOIPS_PACKAGES_DIR/geoips/tests/utils/test_all_run.sh
+    . $GEOIPS/tests/utils/test_all_run.sh
 done
 
-. $GEOIPS_PACKAGES_DIR/geoips/tests/utils/test_all_post.sh
+. $GEOIPS/tests/utils/test_all_post.sh

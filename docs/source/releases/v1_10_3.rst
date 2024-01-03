@@ -1,0 +1,45 @@
+ | # # # Distribution Statement A. Approved for public release. Distribution unlimited.
+ | # # #
+ | # # # Author:
+ | # # # Naval Research Laboratory, Marine Meteorology Division
+ | # # #
+ | # # # This program is free software: you can redistribute it and/or modify it under
+ | # # # the terms of the NRLMMD License included with this program. This program is
+ | # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+ | # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+ | # # # for more details. If you did not receive the license, for more information see:
+ | # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
+
+Version 1.10.3 (2023-07-24)
+***************************
+
+* Breaking change: Update source_name to source_names in product YAMLs
+* Update zenith and azimuth variable names in product YAMLs and python plugins
+
+Breaking Changes
+================
+
+Update zenith and azimuth variable names
+----------------------------------------
+
+*From issue GEOIPS#266: 2023-07-24, update variable names in readers*
+
+SatZenith -> satellite_zenith_angle
+SatAzimuth -> satellite_azimuth_angle
+SunZenith -> solar_zenith_angle
+SunAzimuth-> solar_azimuth_angle
+
+::
+
+  modified:   geocolor/plugins/modules/algorithms/visir/GeoColor.py
+  modified:   geocolor/plugins/yaml/products/abi.yaml
+
+
+Update source_name to source_names in product YAMLs
+---------------------------------------------------
+
+*From issue GEOIPS#267: 2023-07-05, replace source_name with source_names*
+
+::
+
+  modified:   geocolor/plugins/yaml/products/abi.yaml
