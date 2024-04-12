@@ -1,0 +1,166 @@
+ | # # # Distribution Statement A. Approved for public release. Distribution unlimited.
+ | # # #
+ | # # # Author:
+ | # # # Naval Research Laboratory, Marine Meteorology Division
+ | # # #
+ | # # # This program is free software: you can redistribute it and/or modify it under
+ | # # # the terms of the NRLMMD License included with this program. This program is
+ | # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+ | # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+ | # # # for more details. If you did not receive the license, for more information see:
+ | # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
+
+Version 1.10.2 (2023-06-10)
+***************************
+
+* Add v1_10_2.rst release note
+* Finalize plugin organization
+
+  * interface_modules -> plugins/modules
+  * yaml_configs -> plugins/yaml
+  * Rename subdirectories appropriately
+* Finalize interface updates
+
+  * Finalize required attributes / formatting for all plugins
+  * Update all test scripts for new command line options
+* Finalize setup/install
+
+  * Update setuptools_scm to write to _version.py
+  * Replace setup.py with pyproject.toml
+  * Simplify setup.sh to only install gdeck archive
+  * Update to standard .gitignore
+  * Update to standard README.md
+* Finalize test_all.sh - check_code, and $GEOIPS checks
+
+*From issue GEOIPS#251: 2023-05-17, version update*
+
+Breaking Changes
+================
+
+Rename plugin directories
+-------------------------
+
+::
+
+  renamed: interface_modules/algorithms/visir/GeoColor.py -> plugins/modules/algorithms/visir/GeoColor.py
+  renamed: interface_modules/algorithms/visir/dat/deep.bin -> plugins/modules/algorithms/visir/dat/deep.bin
+  renamed: interface_modules/algorithms/visir/dat/land.bin -> plugins/modules/algorithms/visir/dat/land.bin
+  renamed: interface_modules/algorithms/visir/dat/shallow.bin -> plugins/modules/algorithms/visir/dat/shallow.bin
+  renamed: yaml_configs/product_params/visir/GeoColor.yaml -> plugins/yaml/product_defaults/visir/GeoColor.yaml
+  renamed: yaml_configs/product_inputs/abi.yaml -> plugins/yaml/products/abi.yaml
+  renamed: yaml_configs/product_inputs/ahi.yaml -> plugins/yaml/products/ahi.yaml
+
+Finalize required attributes / formatting for all plugins
+---------------------------------------------------------
+
+This includes all module-based and YAML-based plugins.
+
+Modified for black/code formatting as well.
+
+::
+
+  modified: geocolor/plugins/modules/algorithms/visir/GeoColor.py
+  modified: geocolor/plugins/yaml/product_defaults/visir/GeoColor.yaml
+  modified: geocolor/plugins/yaml/products/abi.yaml
+
+Refactoring Updates
+===================
+
+Add __init__.py in all package directories
+------------------------------------------
+
+::
+
+  new file:   geocolor/plugins/__init__.py
+  new file:   geocolor/plugins/modules/__init__.py
+  new file:   geocolor/plugins/modules/algorithms/__init__.py
+  new file:   geocolor/plugins/modules/algorithms/visir/__init__.py
+
+Update setuptools_scm to write to _version.py vs version.py
+-----------------------------------------------------------
+
+This is a more accepted and standard usage. Ensure we ignore the _version.py
+file, import from __init__.py, as well as adding to pyproject.toml.
+
+::
+
+  .gitignore
+  geocolor/__init__.py
+  pyproject.toml
+
+Replace setup.py with pyproject.toml
+------------------------------------
+
+::
+
+  removed: setup.py
+  new: pyproject.toml
+
+Update to standard .gitignore
+-----------------------------
+
+Include all the standard .gitignore information from
+the github template repo.
+
+::
+
+  modified: .gitignore
+
+Update to standard README.md
+----------------------------
+
+Update to include standard README.md information.
+
+* #installation and #readme links
+* Explicit git clone command
+* Reminder to enable GeoIPS environment, vs explicitly sourcing $GEOIPS_CONFIG_FILE
+* Add check_system_requirements.sh commands for getting test data
+* Update GeoIPS version requirement
+
+::
+
+  modified: README.md
+
+Testing Updates
+===============
+
+Update test_all.sh to include $GEOIPS check and code_check test
+---------------------------------------------------------------
+
+Standardize test_all.sh to ensure $GEOIPS is cloned locally, and to
+call the "code_check" test script by default.
+
+::
+
+  tests/test_all.sh
+
+Update all test scripts for new command line options
+----------------------------------------------------
+
+output_format -> output_formatter
+filename_format -> filename_formatter
+boundaries_params -> feature_annotator
+gridlines_params -> gridline_annotator
+
+::
+
+  modified: tests/scripts/abi.sh
+  modified: tests/scripts/abi_global.sh
+  modified: tests/scripts/ahi.sh
+  modified: tests/scripts/goes16.sh
+  modified: tests/scripts/goes17.sh
+  modified: tests/scripts/himawari8.sh
+
+Release Updates
+===============
+
+Add 1.10.0 release note
+-----------------------
+
+*From issue GEOIPS#251: 2023-05-17, version update*
+
+::
+
+    modified: CHANGELOG.rst
+    new file: docs/source/releases/v1_10_2.rst
+    modified: docs/source/releases/index.rst

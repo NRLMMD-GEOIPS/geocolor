@@ -1,84 +1,62 @@
-# @ pyproject.toml specifies how to install your package, and ensures it is
-# @ installed as a valid GeoIPS plugin package.
+[tool.poetry]
+# required ones
+name = "geocolor"  # geoips package available at the root of the project
+version = "0.0.0"  # 0.0.0 will be auto-updated with poetry dynamic versioning!
+description = "Geolocated Information Processing System True Color Plugin"
+authors = ["GeoIPS <geoips@nrlmry.navy.mil>"]
 
-# @ Replace all instances of @ within this template with appropriate values for
-# @ your particular use case.
-# @ Once complete, remove all lines containing "@" from this file.
-
-[build-system]
-requires = ["setuptools>=61.2", "setuptools-scm"]
-build-backend = "setuptools.build_meta"
-
-[tool.setuptools.packages]
-find = {namespaces = false}
-
-[tool.setuptools.package-dir]
-"" = "."
-
-[tool.setuptools.package-data]
-"*" = [
-    "plugins/*.yaml",
-    "plugins/*/*.yaml",
-    "plugins/*/*/*.yaml",
-    "plugins/*/*/*/*.yaml",
-    "plugins/*/*/*/*/*.yaml",
-    "plugins/*.txt",
-    "plugins/*/*.txt",
-    "plugins/*/*/*.txt",
-    "plugins/*/*/*/*.txt",
-    "plugins/*/*/*/*/*.txt",
-]
-
-[tool.setuptools.dynamic]
-entry-points = {file = ["entry-points.ini"]}
-
-[tool.setuptools_scm]
-"version_scheme" = "post-release"  # Use current version .postN vs incrementing
-"local_scheme" = "no-local-version"  # Don't include hash, or date, just postN
-# @ Update with your package name, ie:
-# @ "write_to" = "@package@/_version.py"  # Write an actual file
-"write_to" = "my_package/_version.py"  # Write an actual file
-
-[project]
-# @ Update with your package name, ie:
-# @ name = "@package@"
-name = "my_package"
-authors = []
-description = "@package@ GeoIPS Plugin Package"
+# optional ones
+maintainers = ["GeoIPS <geoips@nrlmry.navy.mil>"]
+#homepage = "set the url"   // optional
+repository = "https://github.com/NRLMMD-GEOIPS/geocolor" #optional
+#documentation = "set the url"      // optional
+#license = {file = "LICENSE"}   // required
 readme = "README.md"
-requires-python = ">=3.9"
-keywords = []
-license = {file = "LICENSE"}
-classifiers = [
+keywords = ["GeoIPS", "Poetry"]
+packages = [
+    { include = "geocolor" },
+] # not needed as tool.poetry.name is properly set already
+classifiers = [ # // list of PyPI trove classifiers to describe the project
     "Programming Language :: Python :: 3",
 ]
-dynamic = ["version"]
+include = ["**/*.txt", "**/*.py", "**/*.yaml"]
 
-[project.entry-points."geoips.plugin_packages"]
-# @ Update with your package name, ie:
-# @ "@package@" = "@package@"
-"my_package" = "my_package"
+# uses current version .postN and not incrementing
+[tool.poetry-dynamic-versioning]
+enable = true
+vcs = "git"
+metadata = false # don't include local-version hash; date doesn't appear by deafult
+style = "pep440" # pep440 is deafult; can rmeove later on; used for : keeping 0.0.8 as the default install until 0.0.9 is out
+#style = "semver"
+#tag-branch = "feature-poetry"
+strict = true
+pattern = "(?x)^((?P<epoch>\\d+)!)?(?P<base>\\d+(\\.\\d+)*)([-._]?((?P<stage>[a-zA-Z]+)[-._]?(?P<revision>\\d+)?))?(\\+(?P<tagged_metadata>.+))?$"
 
-[project.entry-points."geoips.algorithms"]
-"pmw_89test" = "my_package.plugins.modules.algorithms.pmw_89test"
+# NOTE: You must CREATE a _version.py file and commit it via git!
+#     That file will have 0.0.0 as the version - which will get updated when
+#     pip installed.
+# FURTHER NOTE: pip install -e will actually NOT update _version.py.
+#     if you must have a valid version in your local editable install (which
+#     is typically not necessary), you can manually update _version.py
+#     with the following steps:
+#     > pip install poetry-dynamic-versioning
+#     > poetry-dynamic-versioning
+#     (those steps are called automatically when running pip install, but
+#     NOT when running pip install -e)
+[tool.poetry-dynamic-versioning.substitution]
+files = ["*/_version.py"]
 
-# @ Add your own required entry points, based on your new functionality
-# [project.entry-points."geoips.algorithms"]
-# "@my_alg@" = "@package@.plugins.modules.algorithms.@my_alg@"
-# [project.entry-points."geoips.colormappers"]
-# "@my_cmap@" = "@package@.plugins.modules.colormappers.@my_cmap@"
-# [project.entry-points."geoips.interpolators"]
-# "@my_interp@" = "@package@.plugins.modules.interpolators.@my_interp@"
-# [project.entry-points."geoips.output_formatters"]
-# "@my_output_format_1@" = "@package@.plugins.modules.output_formatters.@my_output_format_1@"
-# "@my_output_format_2@" = "@package@.plugins.modules.output_formatters.@my_output_format_2@"
-# [project.entry-points."geoips.readers"]
-# "@my_reader@" = "@package@.plugins.modules.readers.@myreader@"
-# [project.entry-points."geoips.trackfile_parsers"]
-# "@my_parser@" = "@package@.plugins.modules.trackfile_parsers.@my_parser@"
-# [project.entry-points."geoips.filename_formatters"]
-# "@my_fname@" = "@package@.plugins.modules.filename_formatters.@my_fname@"
-# [project.entry-points."geoips.title_formatters"]
-# "@my_title@" = "@package@.plugins.modules.title_formatters.@my_title@"
-# [project.entry-points."geoips.coverage_checkers"]
-# "@my_covg@" = "@package@.plugins.modules.coverage_checkers.@my_covg@"
+# This is where you would specify a pre-build script from pyproject.toml/poetry.
+# [tool.poetry.build]
+# generate-setup-file = false  # I have no idea what this does
+# script = prebuild.py  # This gets called as a python script prior to running build steps
+
+[build-system]
+requires = ["poetry-core>=1.0.0", "poetry-dynamic-versioning>=1.0.0,<2.0.0"]
+build-backend = "poetry_dynamic_versioning.backend"                          # object used to perform the build process
+
+# [tool.poetry.dependencies] # must download to run
+# rayleigh = { git = "https://github.com/NRLMMD-GEOIPS/rayleigh.git", develop = "true", branch = "main" }
+
+[tool.poetry.plugins."geoips.plugin_packages"]
+geocolor = "geocolor"

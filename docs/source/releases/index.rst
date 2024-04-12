@@ -16,10 +16,10 @@
 Release Notes
 *************
 
-Version 0.1
------------
+Version 1.10
+------------
 
 .. toctree::
    :maxdepth: 1
 
-   v0_1_0
+   v1_10_2

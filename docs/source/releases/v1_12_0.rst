@@ -1,0 +1,73 @@
+ | # # # Distribution Statement A. Approved for public release. Distribution unlimited.
+ | # # #
+ | # # # Author:
+ | # # # Naval Research Laboratory, Marine Meteorology Division
+ | # # #
+ | # # # This program is free software: you can redistribute it and/or modify it under
+ | # # # the terms of the NRLMMD License included with this program. This program is
+ | # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+ | # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+ | # # # for more details. If you did not receive the license, for more information see:
+ | # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
+
+Version 1.12.0 (2023-11-17)
+*****************************
+
+* Add registered_plugins.json to .gitignore
+* Update static sector names
+* Update pyproject.toml to poetry, and add 0.0.0 _version.py file
+
+Bug Fixes
+=========
+
+Update pyproject.toml to poetry, and add 0.0.0 _version.py file
+----------------------------------------------------------------
+
+NOTE: git-based pyproject.toml dependencies do not seem to
+build/install quite right. Comment out rayleigh dependency
+in pyproject.toml for now (rayleigh must be pip installed
+*before* geocolor).
+
+Update README to reflect required ancildat/rayleigh clone/install
+prior to installing geocolor.
+
+Move all fortran-based imports out of the top level imports,
+until we get them working with pyproject.toml.
+
+::
+
+  modified: README.md
+  modified: pyproject.toml
+  new: geocolor/_version.py
+
+Add registered_plugins.json to .gitignore
+-----------------------------------------
+
+*From GEOIPS#393: 2023-11-17, public merge bug fixes*
+
+::
+
+  modified: .gitignore
+
+Regression Fix
+==============
+
+Update static sector names
+--------------------------
+
+*From GEOIPS#393: 2023-11-17, public merge bug fixes*
+
+Sector names changed in geoips repo from
+
+* goes16 -> goes_east
+* goes17 -> goes_west
+* himawari8 -> himawari
+
+::
+
+  renamed: tests/outputs/abi_goes16/GeoColor_image/20200918.195020.goes-16.abi.GeoColor.goes16.45p56.noaa.10p0.png -> tests/outputs/abi_goes_east/GeoColor_image/20200918.195020.goes-16.abi.GeoColor.goes_east.45p56.noaa.10p0.png
+  renamed: tests/outputs/abi_goes17/GeoColor_image/20210718.015031.goes-17.abi.GeoColor.goes17.45p56.noaa.10p0.png -> tests/outputs/abi_goes_west/GeoColor_image/20210718.015031.goes-17.abi.GeoColor.goes_west.45p56.noaa.10p0.png
+  renamed: tests/outputs/ahi_himawari8/GeoColor_image/20200405.000000.himawari-8.ahi.GeoColor.himawari8.60p08.jma.10p0.png -> tests/outputs/ahi_himawari/GeoColor_image/20200405.000000.himawari-8.ahi.GeoColor.himawari.60p08.jma.10p0.png
+  renamed/modified: tests/scripts/goes16.sh -> tests/scripts/goes_east.sh
+  renamed/modified: tests/scripts/goes17.sh -> tests/scripts/goes_west.sh
+  renamed/modified: tests/scripts/himawari8.sh -> tests/scripts/himawari.sh
