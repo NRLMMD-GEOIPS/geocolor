@@ -1,0 +1,80 @@
+ | # # # Distribution Statement A. Approved for public release. Distribution unlimited.
+ | # # #
+ | # # # Author:
+ | # # # Naval Research Laboratory, Marine Meteorology Division
+ | # # #
+ | # # # This program is free software: you can redistribute it and/or modify it under
+ | # # # the terms of the NRLMMD License included with this program. This program is
+ | # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+ | # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+ | # # # for more details. If you did not receive the license, for more information see:
+ | # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
+
+Version 1.12.1 (2024-01-04)
+***************************
+
+* Add release note for v1.12.1
+* Remove duplicate ancillary data
+* Black formatting updates
+* Minor image output update (few pixel difference)
+* Documentation updates
+
+  * Add standard documentation outline
+
+Refactoring Updates
+===================
+
+Remove duplicate ancillary data
+-------------------------------
+
+These files are all contained in the synth_green repository (that is where
+they are used).
+
+::
+
+  deleted: dat/*.bin
+  deleted: geocolor/plugins/modules/algorithms/visir/GeoColor/dat/*.bin
+
+Testing Updates
+===============
+
+Minor image output update (few pixel difference)
+------------------------------------------------
+
+Likely due to a dependency update. A few pixels at the eastern most edge
+of the image.
+
+::
+
+  modified: tests/outputs/abi_global/GeoColor_image/20210718.015031.goes-17.abi.GeoColor.global.22p79.noaa.20p0.png
+
+Documentation Updates
+=====================
+
+Add standard documentation outline
+----------------------------------
+
+* Add build_docs.sh call to test_all.sh
+
+::
+
+  new file:   geocolor_api/index.rst
+  new file:   introduction/index.rst
+  new file:   userguide/index.rst
+  modified:   tests/test_all.sh
+
+Release Process
+===============
+
+Add release note for v1.12.1
+----------------------------
+
+*From GEOIPS#422: 2023-12-13, 1.12.0 release process updates*
+
+All updates until the next release (v1.12.1) will be included in
+this release note.
+
+::
+
+  modified: docs/source/releases/v1.12.1.rst
+  modified: docs/source/releases/index.rst

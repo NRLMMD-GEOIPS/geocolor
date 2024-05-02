@@ -16,9 +16,24 @@ Version 1.12.0 (2023-11-17)
 * Add registered_plugins.json to .gitignore
 * Update static sector names
 * Update pyproject.toml to poetry, and add 0.0.0 _version.py file
+* Update GEOIPS BASEDIR -> GEOIPS_PACKAGES_DIR/GEOIPS_TESTDATA_DIR
 
 Bug Fixes
 =========
+
+Update GEOIPS BASEDIR -> GEOIPS_PACKAGES_DIR/GEOIPS_TESTDATA_DIR
+----------------------------------------------------------------
+
+Also update pyproject.toml to the correct url
+
+::
+
+  modified:   pyproject.toml
+  modified:   tests/scripts/abi.sh
+  modified:   tests/scripts/abi_global.sh
+  modified:   tests/scripts/ahi.sh
+  modified:   tests/scripts/himawari.sh
+  modified:   tests/test_all.sh
 
 Update pyproject.toml to poetry, and add 0.0.0 _version.py file
 ----------------------------------------------------------------
