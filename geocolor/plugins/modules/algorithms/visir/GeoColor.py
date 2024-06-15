@@ -171,9 +171,12 @@ def call(xobj):
     # Gather variables
     log.info("Gathering ancillary datasets")
     lons = xobj[var_map["LONS"].strip()].values
-    lats = xobj[var_map["LATS"].strip()].values
-    sunzen = xobj[var_map["SUNZEN"].strip()].values
-    lwir = xobj[var_map["IR"].strip()].values
+    # NOTE these 3 are normalized, which modifies the original
+    # arrays (lats, sunzen, and lwir).  Ensure we copy these
+    # values before applying algorithm.
+    lats = xobj[var_map["LATS"].strip()].values.copy()
+    sunzen = xobj[var_map["SUNZEN"].strip()].values.copy()
+    lwir = xobj[var_map["IR"].strip()].values.copy()
     swir = xobj[var_map["SWIR"].strip()].values
     lights = city_lights(lons, lats)[0]
     ls_mask = land_sea_mask(lons, lats)[0]
@@ -219,9 +222,9 @@ def call(xobj):
     elev = elevation(lons, lats)[0]
     # Set elevation to 0 over water
     # (correct elevation artifacts over water in elevation database)
-    elev[
-        ~bin_ls_mask
-    ] = 0.0  # set elev = 0 where bin_ls_mask = False (i.e., not over land and coast)
+    elev[~bin_ls_mask] = (
+        0.0  # set elev = 0 where bin_ls_mask = False (i.e., not over land and coast)
+    )
 
     # Normalize
     sunzen = 1.0 - normalize(sunzen, min_sunzen, max_sunzen)
