@@ -8,7 +8,7 @@ authors = ["GeoIPS <geoips@nrlmry.navy.mil>"]
 # optional ones
 maintainers = ["GeoIPS <geoips@nrlmry.navy.mil>"]
 #homepage = "set the url"   // optional
-repository = "https://github.com/NRLMMD-GEOIPS/geocolor" #optional
+repository = "https://github.com/NRLMMD-GEOIPS/geocolor"
 #documentation = "set the url"      // optional
 #license = {file = "LICENSE"}   // required
 readme = "README.md"

@@ -219,9 +219,9 @@ def call(xobj):
     elev = elevation(lons, lats)[0]
     # Set elevation to 0 over water
     # (correct elevation artifacts over water in elevation database)
-    elev[
-        ~bin_ls_mask
-    ] = 0.0  # set elev = 0 where bin_ls_mask = False (i.e., not over land and coast)
+    elev[~bin_ls_mask] = (
+        0.0  # set elev = 0 where bin_ls_mask = False (i.e., not over land and coast)
+    )
 
     # Normalize
     sunzen = 1.0 - normalize(sunzen, min_sunzen, max_sunzen)
