@@ -1,0 +1,79 @@
+ | # # # Distribution Statement A. Approved for public release. Distribution unlimited.
+ | # # #
+ | # # # Author:
+ | # # # Naval Research Laboratory, Marine Meteorology Division
+ | # # #
+ | # # # This program is free software: you can redistribute it and/or modify it under
+ | # # # the terms of the NRLMMD License included with this program. This program is
+ | # # # distributed WITHOUT ANY WARRANTY; without even the implied warranty of
+ | # # # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the included license
+ | # # # for more details. If you did not receive the license, for more information see:
+ | # # # https://github.com/U-S-NRL-Marine-Meteorology-Division/
+
+Version 1.12.3 (2024-03-13)
+***************************
+
+* Bug Fixes
+
+  * Copy lats, lwir, and sunzen arrays before normalizing
+  * Update AHI geocolor test output for slightly increased coverage
+* Release Updates
+
+  * Update 'update_this_release_note'
+  * Add release note for v1.12.3
+
+Bug Fixes
+=========
+
+A few pixels difference in AHI test output
+------------------------------------------
+
+After updating the AHI test output, there were still a few pixels difference.
+Not sure what caused it.
+
+::
+
+  modified: tests/outputs/ahi_himawari/GeoColor_image/20200405.000000.himawari-8.ahi.GeoColor.himawari.60p21.jma.10p0.png
+
+Update AHI geocolor output for slightly increased coverage
+----------------------------------------------------------
+
+GEOIPS/geoips#479 AHI geolocation masking update caused slightly increased
+coverage.  60.08 to 60.21% coverage
+
+::
+
+  renamed:    tests/outputs/ahi_himawari/GeoColor_image/20200405.000000.himawari-8.ahi.GeoColor.himawari.60p08.jma.10p0.png -> tests/outputs/ahi_himawari/GeoColor_image/20200405.000000.himawari-8.ahi.GeoColor.himawari.60p21.jma.10p0.png
+
+
+Copy lats, lwir, and sunzen arrays before normalizing
+-----------------------------------------------------
+
+As we began re-using interpolated arrays for downstream processing to improve
+efficiency, noticed geocolor was changing the sun zenith array within the
+original xarray object.  To allow re-using interpolated arrays with other
+products, ensure GeoColor does not change any arrays.
+
+lats and lwir variables also get normalized, and while in the example case they
+did not change (due to being within range), copied those values as well for
+completeness.
+
+::
+
+  modified:   geocolor/plugins/modules/algorithms/visir/GeoColor.py
+
+Release Process
+===============
+
+Add release note for v1.12.3
+----------------------------
+
+*From GEOIPS#458: 2024-02-17, 1.12.1 release*
+
+All updates until the next release (v1.12.3) will be included in
+this release note.
+
+::
+
+  modified: docs/source/releases/v1_12_3.rst
+  modified: docs/source/releases/index.rst

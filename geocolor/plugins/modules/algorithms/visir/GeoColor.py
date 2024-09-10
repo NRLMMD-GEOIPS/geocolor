@@ -171,9 +171,12 @@ def call(xobj):
     # Gather variables
     log.info("Gathering ancillary datasets")
     lons = xobj[var_map["LONS"].strip()].values
-    lats = xobj[var_map["LATS"].strip()].values
-    sunzen = xobj[var_map["SUNZEN"].strip()].values
-    lwir = xobj[var_map["IR"].strip()].values
+    # NOTE these 3 are normalized, which modifies the original
+    # arrays (lats, sunzen, and lwir).  Ensure we copy these
+    # values before applying algorithm.
+    lats = xobj[var_map["LATS"].strip()].values.copy()
+    sunzen = xobj[var_map["SUNZEN"].strip()].values.copy()
+    lwir = xobj[var_map["IR"].strip()].values.copy()
     swir = xobj[var_map["SWIR"].strip()].values
     lights = city_lights(lons, lats)[0]
     ls_mask = land_sea_mask(lons, lats)[0]
