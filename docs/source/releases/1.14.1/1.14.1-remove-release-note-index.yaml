@@ -1,0 +1,12 @@
+documentation:
+- title: 'Remove release note index.rst'
+  description: |
+    *From GEOIPS#562: 2024-09-24, 1.14.1 updates*
+
+    Now auto-generated with brassy.
+  files:
+    deleted:
+    - 'docs/source/releases/index.rst'
+  related-issue:
+    number: 562
+    repo_url: GEOIPS/geoips

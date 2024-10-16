@@ -1,0 +1,26 @@
+documentation:
+  - title: "Updating to standard sync files"
+    description: |
+      *From GEOIPS#562: 2024-09-24, 1.14.1 updates*
+
+      Standard files copied from geoips_ci/sync directory.
+    files:
+      modified:
+        - .github/release.yml
+        - .gitignore
+        - CHANGELOG.rst
+      added:
+        - .flake8
+        - .github/workflows/brassy-notes.yaml
+        - .github/workflows/deploy-docs.yaml
+        - .github/workflows/lint.yaml
+        - .github/workflows/package-and-publish.yaml
+        - .github/workflows/proper-release-note-edits.yaml
+        - .github/workflows/tag-and-release.yaml
+        - CODE_OF_CONDUCT.md
+        - DISTRIBUTION
+        - bandit.yml
+        - pytest.ini
+    related-issue:
+      number: 562
+      repo_url: GEOIPS/geoips
