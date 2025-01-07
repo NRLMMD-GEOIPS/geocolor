@@ -33,4 +33,4 @@ jobs:
     permissions:
       contents: write
     secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
+      token: ${{ secrets.GEOIPS_TOKEN }}
