@@ -46,3 +46,45 @@ spec:
             "latitude",
             "longitude",
           ]
+    - name: GeoColor
+      source_names: [fci]
+      docstring: |
+        FCI GeoColor.
+      product_defaults: GeoColor
+      spec:
+        variables:
+          [
+            "B01Rad",
+            "B02Rad",
+            "B03Rad",
+            "B04Rad",
+            "B09BT",
+            "B14BT",
+            "solar_zenith_angle",
+            "satellite_zenith_angle",
+            "solar_azimuth_angle",
+            "satellite_azimuth_angle",
+            "latitude",
+            "longitude",
+          ]
+    - name: GeoColor
+      source_names: [ami]
+      docstring: |
+        AMI GeoColor.
+      product_defaults: GeoColor
+      spec:
+        variables:
+          [
+            "VI004Rad",
+            "VI005Rad",
+            "VI006Rad",
+            "VI008Rad",
+            "SW038BT",
+            "IR105BT",
+            "solar_zenith_angle",
+            "satellite_zenith_angle",
+            "solar_azimuth_angle",
+            "satellite_azimuth_angle",
+            "latitude",
+            "longitude",
+          ]
