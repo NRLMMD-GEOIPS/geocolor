@@ -327,23 +327,6 @@ def call(xobj):
         + (1.0 - norm_lwir[gb]) * (0.2 * btd[gb] + (1.0 - btd[gb]) * blu[gb])
     ) + sunzen[gb] * true_color["BLU"][gb]
 
-    # from matplotlib import pyplot as plt
-
-    # fig = plt.figure(figsize=(lwir.shape[0] / 100, lwir.shape[1] / 100))
-    # ax = fig.add_axes((0, 0, 1, 1))
-    # ax.imshow(lwir, cmap="Greys", vmin=150, vmax=360)
-    # fig.savefig("lw_infra.png", bbox_inches="tight")
-
-    # ax = fig.add_axes((0, 0, 1, 1))
-    # ax.imshow(swir, cmap="Greys")
-    # fig.savefig("sw_infra.png", bbox_inches="tight")
-
-    # ax = fig.add_axes((0, 0, 1, 1))
-    # ax.imshow(
-    #     np.dstack([true_color["RED"], true_color["GRN"], true_color["BLU"]]),
-    # )
-    # fig.savefig("rgb.png", bbox_inches="tight")
-
     red[~gb] = 0.0
     grn[~gb] = 0.0
     blu[~gb] = 0.0
