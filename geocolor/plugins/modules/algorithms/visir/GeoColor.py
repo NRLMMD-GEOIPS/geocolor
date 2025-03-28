@@ -33,6 +33,34 @@ ahi_var_map = {
     "SATAZM": "satellite_azimuth_angle",
     "SUNAZM": "solar_azimuth_angle",
 }
+fci_var_map = {
+    "BLU": "B01Rad",
+    "GRN": "B02Rad",
+    "RED": "B03Rad",
+    "NIR": "B04Rad",
+    "SWIR": "B09BT",
+    "IR": "B14BT",
+    "LATS": "latitude",
+    "LONS": "longitude",
+    "SATZEN": "satellite_zenith_angle",
+    "SUNZEN": "solar_zenith_angle",
+    "SATAZM": "satellite_azimuth_angle",
+    "SUNAZM": "solar_azimuth_angle",
+}
+ami_var_map = {
+    "BLU": "VI004Rad",
+    "GRN": "VI005Rad",
+    "RED": "VI006Rad",
+    "NIR": "VI008Rad",
+    "SWIR": "SW038BT",
+    "IR": "IR105BT",
+    "LATS": "latitude",
+    "LONS": "longitude",
+    "SATZEN": "satellite_zenith_angle",
+    "SUNZEN": "solar_zenith_angle",
+    "SATAZM": "satellite_azimuth_angle",
+    "SUNAZM": "solar_azimuth_angle",
+}
 abi_var_map = {
     "BLU": "B01Rad",
     "RED": "B02Rad",
@@ -50,6 +78,8 @@ abi_var_map = {
 sensor_var_maps = {
     "ahi": ahi_var_map,
     "abi": abi_var_map,
+    "ami": ami_var_map,
+    "fci": fci_var_map,
 }
 
 
@@ -190,7 +220,7 @@ def call(xobj):
 
     # Compute True Color for daytime side
     log.info("Computing true color.")
-    if xobj.source_name == "ahi":
+    if xobj.source_name in ["ahi", "fci"]:
         true_color = compute_ahi_true_color(ref)
     elif xobj.source_name == "abi":
         true_color = compute_abi_true_color(ref, ls_mask)
@@ -287,6 +317,7 @@ def call(xobj):
         norm_lwir[gb]
         + (1.0 - norm_lwir[gb]) * (0.2 * btd[gb] + (1.0 - btd[gb]) * blu[gb])
     ) + sunzen[gb] * true_color["BLU"][gb]
+
     red[~gb] = 0.0
     grn[~gb] = 0.0
     blu[~gb] = 0.0
