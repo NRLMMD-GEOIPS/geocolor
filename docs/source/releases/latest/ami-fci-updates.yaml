@@ -4,10 +4,13 @@ enhancement:
     updated GeoColor algorithm so that it can handle data coming from these sources.
     This PR should not be merged until the corresponding PR in our 'Rayleigh' package
     has been merged, as this package depends on Rayleigh to compute accurate scattering.
+
+    This update also includes a new script which downloads test data for this package.
   files:
     added:
       - tests/scripts/ami.sh
-      - tests/scritps/fci.sh
+      - tests/scripts/fci.sh
+      - tests/install_test_data.sh
     modified:
       - geocolor/plugins/modules/algorithms/visir/GeoColor.py
       - geocolor/plugins/yaml/products/abi.yaml
