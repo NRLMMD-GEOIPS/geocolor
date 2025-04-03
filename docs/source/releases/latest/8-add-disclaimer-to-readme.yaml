@@ -1,0 +1,18 @@
+documentation:
+- title: 'Add disclaimer to readme'
+  description: 'Added a disclaimer to the readme to describe the state of this plugin package'
+  files:
+    deleted:
+    - ''
+    moved:
+    - ''
+    added:
+    - ''
+    modified:
+    - 'README.md'
+  related-issue:
+    number: 8
+    repo_url: 'https://github.com/NRLMMD-GEOIPS/geocolor'
+  date:
+    start: 2025-04-03
+    finish: 2025-04-03
