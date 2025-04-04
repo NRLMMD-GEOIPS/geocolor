@@ -1,6 +1,6 @@
 #!/bin/bash
 
-geoips run single_source $GEOIPS_TESTDATA_DIR/test_data_geocolor/data/geokompsat/20240920.1500/*.nc \
+geoips run single_source $GEOIPS_TESTDATA_DIR/test_data_geocolor/data/geokompsat/20240924.1500/*.nc \
     --reader_name ami_netcdf \
     --product_name GeoColor \
     --output_formatter imagery_clean \
