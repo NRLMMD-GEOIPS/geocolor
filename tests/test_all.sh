@@ -46,6 +46,7 @@ for call in \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/ami.sh" \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/fci.sh" \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_global.sh" \
+  "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_clean.sh" \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_east.sh" \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_west.sh"
 do
