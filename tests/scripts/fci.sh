@@ -6,10 +6,10 @@ geoips run single_source $GEOIPS_TESTDATA_DIR/test_data_geocolor/data/mtg/202409
     --self_register_dataset 'FULL_DISK' \
     --self_register_source fci \
     --output_formatter unprojected_image \
-    --output_formatter_kwargs '{"x_size": "11136", "y_size": "11136"}' \
+    --output_formatter_kwargs '{"x_size": "5568", "y_size": "5568"}' \
     --filename_formatter geoips_fname \
     --product_name GeoColor \
+    --compare_path "$GEOIPS_PACKAGES_DIR/geocolor/tests/outputs/fci/<product>_image" \
     --minimum_coverage 0
 retval=$?
 exit $retval
-

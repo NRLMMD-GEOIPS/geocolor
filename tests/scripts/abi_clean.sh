@@ -6,7 +6,7 @@
 geoips run single_source $GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes16/20240924.1500/* \
     --reader_name abi_netcdf \
     --product_name GeoColor \
-    --compare_path "$GEOIPS_PACKAGES_DIR/geocolor/tests/outputs/abi/<product>_image" \
+    --compare_path "$GEOIPS_PACKAGES_DIR/geocolor/tests/outputs/abi_clean/<product>_image" \
     --reader_kwargs '{"self_register": "LOW"}' \
     --self_register_dataset 'Full-Disk' \
     --self_register_source abi \
