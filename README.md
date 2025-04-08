@@ -77,7 +77,7 @@ making the installation process much easier in the future.
 
     # Install test_data_geocolor to your default $GEOIPS_TESTDATA_DIR
     # This command defaults to that location, hence the absence of '--outdir'
-    geoips config install geocolor
+    geoips config install test_data_geocolor
 
 ```
 
