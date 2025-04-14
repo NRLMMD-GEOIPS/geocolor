@@ -1,4 +1,4 @@
-# # # This source code is protected under the license referenced at
+# # # This source code is subject to the license referenced at
 # # # https://github.com/NRLMMD-GEOIPS.
 
 """GeoColor algorithm."""
@@ -317,7 +317,6 @@ def call(xobj):
         norm_lwir[gb]
         + (1.0 - norm_lwir[gb]) * (0.2 * btd[gb] + (1.0 - btd[gb]) * blu[gb])
     ) + sunzen[gb] * true_color["BLU"][gb]
-
     red[~gb] = 0.0
     grn[~gb] = 0.0
     blu[~gb] = 0.0
