@@ -7,7 +7,7 @@ spec:
   mtif_type: rgb
   algorithm:
     plugin:
-      name: GeoColor
+      name: GeoColorV2
       arguments: {}
   colormapper:
     plugin:
