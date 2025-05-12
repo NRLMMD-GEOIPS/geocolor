@@ -307,15 +307,15 @@ def call(xobj):
     gb = good_bt
     red[gb] = (1.0 - sunzen[gb]) ** 1.5 * (
         norm_lwir[gb]
-        + (1.0 - norm_lwir[gb]) * (1.0 * btd[gb] + (1.0 - btd[gb]) * red[gb])
+        + (1.0 - norm_lwir[gb]) * (0.55 * btd[gb] + (1.0 - btd[gb]) * red[gb])
     ) + sunzen[gb] * true_color["RED"][gb]
     grn[gb] = (1.0 - sunzen[gb]) ** 1.5 * (
         norm_lwir[gb]
-        + (1.0 - norm_lwir[gb]) * (0.3 * btd[gb] + (1.0 - btd[gb]) * grn[gb])
+        + (1.0 - norm_lwir[gb]) * (0.75 * btd[gb] + (1.0 - btd[gb]) * grn[gb])
     ) + sunzen[gb] * true_color["GRN"][gb]
     blu[gb] = (1.0 - sunzen[gb]) ** 1.5 * (
         norm_lwir[gb]
-        + (1.0 - norm_lwir[gb]) * (0.2 * btd[gb] + (1.0 - btd[gb]) * blu[gb])
+        + (1.0 - norm_lwir[gb]) * (0.98 * btd[gb] + (1.0 - btd[gb]) * blu[gb])
     ) + sunzen[gb] * true_color["BLU"][gb]
 
     red[~gb] = 0.0
