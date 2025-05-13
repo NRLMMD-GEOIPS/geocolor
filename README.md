@@ -1,5 +1,9 @@
-    # # # This source code is protected under the license referenced at
+    # # # This source code is subject to the license referenced at
     # # # https://github.com/NRLMMD-GEOIPS.
+
+| ⚠️ **Warning** |
+| -------------- |
+| This package is an early release and should be expected to change in the future. We don’t expect the functionality to change in significant ways. We intend to improve the installation process, consolidate packages and, potentially, convert Fortran routines to Python to avoid complexity in installation. |
 
 GeoColor GeoIPS Plugin
 ======================
@@ -18,11 +22,11 @@ the day, and enhanced infrared imagery at night.
 System Requirements
 ---------------------
 
-* geoips >= 1.12.0
+* geoips >= 1.15.0
 * Test data repos contained in $GEOIPS_TESTDATA_DIR for tests to pass.
 * fortran_utils
 * ancildat
-* true_color >= 1.12.0
+* true_color >= 1.15.0
 
 IF REQUIRED: Install base geoips package
 ------------------------------------------------------------
@@ -39,7 +43,9 @@ Install geocolor package
     # Ensure GeoIPS Python environment is enabled.
 
     # Clone and install geocolor
+    git clone https://github.com/NRLMMD-GEOIPS/fortran_utils $GEOIPS_PACKAGES_DIR/fortran_utils
     git clone https://github.com/NRLMMD-GEOIPS/ancildat $GEOIPS_PACKAGES_DIR/ancildat
+    git clone https://github.com/NRLMMD-GEOIPS/synth_green $GEOIPS_PACKAGES_DIR/synth_green
     git clone https://github.com/NRLMMD-GEOIPS/rayleigh $GEOIPS_PACKAGES_DIR/rayleigh
     git clone https://github.com/NRLMMD-GEOIPS/geocolor $GEOIPS_PACKAGES_DIR/geocolor
 
@@ -47,7 +53,9 @@ Install geocolor package
     # including in pyproject.toml resulted in incorrect installation paths.
     # More work required to get the pip dependencies working properly for fortran
     # installations via pyproject.toml with the poetry backend.
+    pip install -e $GEOIPS_PACKAGES_DIR/fortran_utils
     pip install -e $GEOIPS_PACKAGES_DIR/ancildat
+    pip install -e $GEOIPS_PACKAGES_DIR/synth_green
     pip install -e $GEOIPS_PACKAGES_DIR/rayleigh
     pip install -e $GEOIPS_PACKAGES_DIR/geocolor
 
@@ -65,8 +73,8 @@ Test geocolor installation
     # Individual direct test calls, for reference
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi.sh
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/ahi.sh
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes16.sh
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes17.sh
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/himawari8.sh
+    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_east.sh
+    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_west.sh
+    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/himawari.sh
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_global.sh
 ```
