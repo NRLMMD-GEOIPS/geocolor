@@ -1,5 +1,9 @@
-    # # # This source code is protected under the license referenced at
+    # # # This source code is subject to the license referenced at
     # # # https://github.com/NRLMMD-GEOIPS.
+
+| ⚠️ **Warning** |
+| -------------- |
+| This package is an early release and should be expected to change in the future. We don’t expect the functionality to change in significant ways. We intend to improve the installation process, consolidate packages and, potentially, convert Fortran routines to Python to avoid complexity in installation. |
 
 GeoColor GeoIPS Plugin
 ======================
@@ -18,11 +22,11 @@ the day, and enhanced infrared imagery at night.
 System Requirements
 ---------------------
 
-* geoips >= 1.12.0
+* geoips >= 1.15.0
 * Test data repos contained in $GEOIPS_TESTDATA_DIR for tests to pass.
 * fortran_utils
 * ancildat
-* true_color >= 1.12.0
+* true_color >= 1.15.0
 
 IF REQUIRED: Install base geoips package
 ------------------------------------------------------------
@@ -58,6 +62,11 @@ making the installation process much easier in the future.
 
     # NOTE: fortran_utils MUST be installed prior to ancildat and rayleigh.
     # If you install in this order and you should be fine.
+
+    # NOTE: currently, fortran dependencies must be installed separately, initially
+    # including in pyproject.toml resulted in incorrect installation paths.
+    # More work required to get the pip dependencies working properly for fortran
+    # installations via pyproject.toml with the poetry backend.
     pip install -e $GEOIPS_PACKAGES_DIR/fortran_utils
     pip install -e $GEOIPS_PACKAGES_DIR/ancildat
     pip install -e $GEOIPS_PACKAGES_DIR/synth_green

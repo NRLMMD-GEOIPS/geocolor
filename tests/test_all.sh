@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# # # This source code is protected under the license referenced at
+# # # This source code is subject to the license referenced at
 # # # https://github.com/NRLMMD-GEOIPS.
 
 # Do not rename this script or test directory - automated integration
