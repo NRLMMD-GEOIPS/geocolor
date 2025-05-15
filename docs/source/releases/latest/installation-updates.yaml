@@ -1,0 +1,25 @@
+installation:
+- title: 'GeoColor Installation Updates'
+  description: |
+    Updated README.md to include most recent instructions for installing GeoColor
+    correctly. Makes use of updated CLI commands and recently public packages needed
+    for GeoColor. Addititionally, this PR updated test scripts to make use of the new
+    test_data_geocolor datasets.
+  files:
+    deleted:
+      - tests/scripts/himawari.sh
+    modified:
+      - tests/scripts/abi.sh
+      - tests/scripts/abi_global.sh
+      - tests/scripts/ahi.sh
+      - tests/scripts/ami.sh
+      - tests/scripts/fci.sh
+      - tests/scripts/goes_east.sh
+      - tests/scripts/goes_west.sh
+      - tests/test_all.sh
+  related-issue:
+    number: null
+    repo_url: ''
+  date:
+    start: null
+    finish: null

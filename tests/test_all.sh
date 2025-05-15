@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# # # This source code is protected under the license referenced at
+# # # This source code is subject to the license referenced at
 # # # https://github.com/NRLMMD-GEOIPS.
 
 # Do not rename this script or test directory - automated integration
@@ -43,10 +43,12 @@ for call in \
   "$GEOIPS_PACKAGES_DIR/geoips/docs/build_docs.sh $repopath $pkgname html_only" \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi.sh" \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/ahi.sh" \
+  "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/ami.sh" \
+  "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/fci.sh" \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_global.sh" \
+  "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_clean.sh" \
   "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_east.sh" \
-  "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_west.sh" \
-  "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/himawari.sh"
+  "$GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_west.sh"
 do
   . $GEOIPS_PACKAGES_DIR/geoips/tests/utils/test_all_run.sh
 done

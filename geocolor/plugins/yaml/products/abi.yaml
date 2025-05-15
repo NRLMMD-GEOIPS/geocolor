@@ -1,0 +1,48 @@
+interface: products
+family: list
+name: geocolor
+docstring: |
+  GeoColor products.
+spec:
+  products:
+    - name: GeoColor
+      source_names: [abi]
+      docstring: |
+        ABI GeoColor.
+      product_defaults: GeoColor
+      spec:
+        variables:
+          [
+            "B01Rad",
+            "B02Rad",
+            "B03Rad",
+            "B07BT",
+            "B13BT",
+            "solar_zenith_angle",
+            "satellite_zenith_angle",
+            "solar_azimuth_angle",
+            "satellite_azimuth_angle",
+            "latitude",
+            "longitude",
+          ]
+    - name: GeoColor
+      source_names: [ahi]
+      docstring: |
+        AHI GeoColor.
+      product_defaults: GeoColor
+      spec:
+        variables:
+          [
+            "B01Rad",
+            "B02Rad",
+            "B03Rad",
+            "B04Rad",
+            "B07BT",
+            "B13BT",
+            "solar_zenith_angle",
+            "satellite_zenith_angle",
+            "solar_azimuth_angle",
+            "satellite_azimuth_angle",
+            "latitude",
+            "longitude",
+          ]
