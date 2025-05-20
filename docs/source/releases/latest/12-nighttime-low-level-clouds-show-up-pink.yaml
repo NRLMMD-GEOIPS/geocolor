@@ -1,14 +1,22 @@
 enhancement:
-- title: 'Fixing low-level nighttime clouds to show up light blue instead of pink'
+- title: 'Fixing low-level nighttime clouds and updating test scripts'
   description: |
     'Fixing low-level nighttime clouds to show up light blue instead of pink.
     This changes the RGB ratios used in GeoColor.py and replaces the comparison
-    test files with new examples.'
+    test files with new examples. Also fix a broken file reference in `tests/test_all.sh` to `$GEOIPS_PACKAGES_DIR/geoips/tests/utils/test_all_post.sh`.'
   files:
     added:
     - 'docs/source/releases/latest/12-nighttime-low-level-clouds-show-up-pink.yaml'
     modified:
     - 'geocolor/plugins/modules/algorithms/visir/GeoColor.py'
+    - 'tests/test_all.sh'
+    - 'tests/outputs/abi/GeoColor_image/20240924.150021.goes-18.abi.GeoColor.goes_west.45p56.noaa.10p0.png'
+    - 'tests/outputs/abi_global/GeoColor_image/20240924.150021.goes-18.abi.GeoColor.global.22p79.noaa.20p0.png'
+    - 'tests/outputs/abi_goes_east/GeoColor_image/20240924.150020.goes-16.abi.GeoColor.goes_east.45p56.noaa.10p0.png'
+    - 'tests/outputs/ahi/GeoColor_image/20240924.150000.himawari-9.ahi.GeoColor.himawari.56p36.jma.10p0.png'
+    deleted:
+    - 'tests/scripts/goes_west.sh'
+    - 'tests/outputs/abi_goes_west/GeoColor_image/20240924.150021.goes-18.abi.GeoColor.goes_west.45p56.noaa.10p0.png'
   related-issue:
     number: 12
     repo_url: 'https://github.com/NRLMMD-GEOIPS/geocolor'
