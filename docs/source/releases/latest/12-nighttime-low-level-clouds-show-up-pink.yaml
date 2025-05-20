@@ -1,0 +1,17 @@
+enhancement:
+- title: 'Fixing low-level nighttime clouds to show up light blue instead of pink'
+  description: |
+    'Fixing low-level nighttime clouds to show up light blue instead of pink.
+    This changes the RGB ratios used in GeoColor.py and replaces the comparison
+    test files with new examples.'
+  files:
+    added:
+    - 'docs/source/releases/latest/12-nighttime-low-level-clouds-show-up-pink.yaml'
+    modified:
+    - 'geocolor/plugins/modules/algorithms/visir/GeoColor.py'
+  related-issue:
+    number: 12
+    repo_url: 'https://github.com/NRLMMD-GEOIPS/geocolor'
+  date:
+    start: 2025/05/13
+    finish: today
