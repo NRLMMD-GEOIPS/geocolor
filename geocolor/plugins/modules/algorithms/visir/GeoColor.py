@@ -96,7 +96,7 @@ def normalize_ir_by_abslats(ir, lats):
     abslats = np.ma.abs(lats)
     abslats[abslats < 30.0] = 30.0
     abslats[abslats > 60.0] = 60.0
-    minir = 170 + 30.0 * (abslats - 30.0) / (60.0 - 30.0)
+    minir = 170 + 20.0 * (abslats - 30.0) / (60.0 - 30.0)
     normir = (ir - minir) / (300.0 - minir)
     return normir
 
