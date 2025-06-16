@@ -67,8 +67,8 @@ Test geocolor installation
 
     # Ensure GeoIPS Python environment is enabled.
 
-    # This script will run ALL tests within this package
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/test_all.sh
+    # This will run ALL tests within this package
+    pytest -m integration $GEOIPS_PACKAGES_DIR/geocolor
 
     # Individual direct test calls, for reference
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi.sh

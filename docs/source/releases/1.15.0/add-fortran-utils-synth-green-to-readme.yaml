@@ -1,0 +1,8 @@
+breaking change:
+  - title: "Add fortran_utils, synth_green install to README"
+    description: |
+      * fortran_utils must be installed before ancildat.
+      * synth_green must be installed before rayleigh.
+    files:
+      modified:
+        - README.md
