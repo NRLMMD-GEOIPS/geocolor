@@ -11,8 +11,8 @@ run_procflow $GEOIPS_TESTDATA_DIR/test_data_abi_day/data/goes17_20210718_0150//*
           --compare_path "$GEOIPS_PACKAGES_DIR/geocolor/tests/outputs/abi/<product>_image" \
          --output_formatter imagery_clean \
          --filename_formatter tc_clean_fname \
-         --trackfile_parser gdeck_parser \
-         --trackfiles $GEOIPS_TESTDATA_DIR/test_data_abi_day/sectors/Gep062021.dat \
+         --trackfile_parser bdeck_parser \
+         --trackfiles $GEOIPS_PACKAGES_DIR/geoips/tests/sectors/tc_bdecks/bep062021.dat \
          --feature_annotator tc_visir \
          --gridline_annotator tc_visir
 retval=$?
