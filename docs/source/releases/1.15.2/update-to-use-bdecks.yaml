@@ -1,3 +1,4 @@
+# cspell:ignore bdecks
 bug fix:
 - title: 'Update to use bdecks in geoips repo'
   description: 'No longer storing deck files in test data repos'
@@ -18,7 +19,7 @@ bug fix:
     start: 2025-04-14
     finish: 2025-05-07
 testing:
-- title: 'Update ABI geocolor image ouput for matplotlib image interpolation change'
+- title: 'Update ABI geocolor image output for matplotlib image interpolation change'
   description: |
     I don't know why this is the only one that changed.
   files:
