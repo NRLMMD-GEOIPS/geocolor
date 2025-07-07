@@ -93,11 +93,17 @@ def normalize(val, minval, maxval):
 
 def normalize_ir_by_abslats(ir, lats):
     """Normalize IR by absolute latitudes."""
+    maxir = 300.0
+    mnil = 210.0
+    mnih = 230.0
     abslats = np.ma.abs(lats)
     abslats[abslats < 30.0] = 30.0
     abslats[abslats > 60.0] = 60.0
-    minir = 170 + 20.0 * (abslats - 30.0) / (60.0 - 30.0)
-    normir = (ir - minir) / (300.0 - minir)
+    minir = mnil + 20.0 * (abslats - 30.0) / (60.0 - 30.0)
+    # IDL GeoColor code sets min/max values to mnil/mnih
+    minir[minir < mnil] = mnil
+    minir[minir < mnih] = mnih
+    normir = (ir - minir) / (maxir - minir)
     return normir
 
 
@@ -106,7 +112,8 @@ def normalize_city_lights(lights):
     lights[lights <= 0] = 0.0223
     lights[lights > 0] = np.log10(lights[lights > 0])
     min_lights = -0.5
-    max_lights = 1.0
+    # max lights = 2.0 in IDL GeoColor code
+    max_lights = 2.0
     lights = normalize(lights, min_lights, max_lights)
     return lights
 
@@ -232,7 +239,8 @@ def call(xobj):
     min_sunzen = 75.0
     max_sunzen = 85.0
     min_elev = 0.0
-    max_elev = 200000.0
+    # Max elevation/bathymetry = 50,000 in IDL GeoColor code
+    max_elev = 50_000.0  # 200000.0
     # min_fmt_lnd = 1.0
     # max_fmt_lnd = 4.5
 
@@ -248,7 +256,8 @@ def call(xobj):
     )
 
     # Normalize
-    sunzen = 1.0 - normalize(sunzen, min_sunzen, max_sunzen)
+    # Why are we raising to power of 1.5? It was in the GeoColor IDL counterpart
+    sunzen = (1.0 - normalize(sunzen, min_sunzen, max_sunzen)) ** 1.5
     norm_lwir = 1.0 - normalize_ir_by_abslats(lwir, lats) ** 1.1
     elev = normalize(elev, min_elev, max_elev)
     lights = normalize_city_lights(lights)
@@ -259,7 +268,8 @@ def call(xobj):
     blu = np.empty(norm_lwir.shape)
 
     # Add in the city lights
-    good_lights = lights > 0.01
+    # Lights threshold for IDL GeoColor code = 0.2
+    good_lights = lights > 0.2
     gl = good_lights
     red[gl] = (lights[gl] * 0.8) ** 0.75
     grn[gl] = (lights[gl] * 0.8) ** 1.25
@@ -295,6 +305,8 @@ def call(xobj):
     max_diff_lnd = 4.5
     min_diff_wat = 0.5
     max_diff_wat = 4.5
+    # lwir => long wave infrared
+    # swir => short wave infrared
     btd = lwir - swir
     btd[lwir < 230.0] = 0.0
     # NOTE: More ccbg stuff should go here.  Skipping for now.
@@ -305,6 +317,7 @@ def call(xobj):
     log.info("Blend daytime with nighttime across terminator.")
     good_bt = np.logical_or(lwir > 150.0, lwir < 360.0)
     gb = good_bt
+    # btd = brightness temperature difference
     red[gb] = (1.0 - sunzen[gb]) ** 1.5 * (
         norm_lwir[gb]
         + (1.0 - norm_lwir[gb]) * (0.55 * btd[gb] + (1.0 - btd[gb]) * red[gb])
