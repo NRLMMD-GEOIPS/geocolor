@@ -93,17 +93,22 @@ def normalize(val, minval, maxval):
 
 def normalize_ir_by_abslats(ir, lats):
     """Normalize IR by absolute latitudes."""
-    maxir = 300.0
-    mnil = 210.0
-    mnih = 230.0
     abslats = np.ma.abs(lats)
     abslats[abslats < 30.0] = 30.0
     abslats[abslats > 60.0] = 60.0
-    minir = mnil + 20.0 * (abslats - 30.0) / (60.0 - 30.0)
-    # IDL GeoColor code sets min/max values to mnil/mnih
-    minir[minir < mnil] = mnil
-    minir[minir < mnih] = mnih
-    normir = (ir - minir) / (maxir - minir)
+
+    # maxir = 300.0
+    # mnil = 210.0
+    # mnih = 230.0
+    # minir = mnil + 20.0 * (abslats - 30.0) / (60.0 - 30.0)
+    # # IDL GeoColor code sets min/max values to mnil/mnih
+    # minir[minir < mnil] = mnil
+    # minir[minir < mnih] = mnih
+    # normir = (ir - minir) / (maxir - minir)
+
+    minir = 210.0 + 20.0 * ((abslats - 30.0) / (60.0 - 30.0))
+    normir = (ir - minir) / (300.0 - minir)
+
     return normir
 
 
