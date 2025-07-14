@@ -106,7 +106,7 @@ def normalize_ir_by_abslats(ir, lats):
     # minir[minir < mnih] = mnih
     # normir = (ir - minir) / (maxir - minir)
 
-    minir = 210.0 + 20.0 * ((abslats - 30.0) / (60.0 - 30.0))
+    minir = 170 + 30.0 * (abslats - 30.0) / (60.0 - 30.0)
     normir = (ir - minir) / (300.0 - minir)
 
     return normir

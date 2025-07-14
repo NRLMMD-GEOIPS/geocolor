@@ -5,8 +5,7 @@
 
 geoips run single_source $GEOIPS_TESTDATA_DIR/test_data_geocolor/data/mtg/20240924.1500/*.nc \
     --reader_name fci_netcdf \
-    --reader_kwargs '{"self_register": "LOW"}' \
-    --self_register_dataset 'FULL_DISK' \
+    --self_register_dataset LOW \
     --self_register_source fci \
     --output_formatter unprojected_image \
     --output_formatter_kwargs '{"x_size": "5568", "y_size": "5568"}' \
