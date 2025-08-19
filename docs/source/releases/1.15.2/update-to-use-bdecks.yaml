@@ -1,0 +1,39 @@
+# cspell:ignore bdecks
+bug fix:
+- title: 'Update to use bdecks in geoips repo'
+  description: 'No longer storing deck files in test data repos'
+  files:
+    deleted:
+    - ''
+    moved:
+    - ''
+    added:
+    - ''
+    modified:
+    - tests/scripts/abi.sh
+    - tests/scripts/ahi.sh
+  related-issue:
+    number: 753
+    repo_url: "GEOIPS/geoips"
+  date:
+    start: 2025-04-14
+    finish: 2025-05-07
+testing:
+- title: 'Update ABI geocolor image output for matplotlib image interpolation change'
+  description: |
+    I don't know why this is the only one that changed.
+  files:
+    deleted:
+    - ''
+    moved:
+    - ''
+    added:
+    - ''
+    modified:
+    - tests/outputs/abi/GeoColor_image/20210718_015031_EP062021_abi_goes-17_GeoColor_120kts_100p00_1p0-clean.png
+  related-issue:
+    number: 753
+    repo_url: "GEOIPS/geoips"
+  date:
+    start: 2025-05-07
+    finish: 2025-05-07

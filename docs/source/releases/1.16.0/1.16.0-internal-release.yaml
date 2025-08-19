@@ -1,0 +1,12 @@
+Release Process:
+- title: Add 1.16.0 release note
+  description: |
+    Currently tagged internal version 1.15.3.
+  files:
+    added:
+    - docs/source/releases/1.16.0/1.16.0-internal-release.yaml
+  related-issue:
+    internal: GEOIPS#861 - 1.16.0 updates*
+  date:
+    start: 2025-05-30
+    finish: 2025-05-30

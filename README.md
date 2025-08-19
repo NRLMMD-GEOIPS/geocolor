@@ -63,6 +63,10 @@ making the installation process much easier in the future.
     # NOTE: fortran_utils MUST be installed prior to ancildat and rayleigh.
     # If you install in this order and you should be fine.
 
+    # NOTE: if you are reinstalling these packages from a previous installation,
+    # you must first call `make clean` from within each fortran dependency.
+    # i.e. fortran_utils, ancildat, synth_green, rayleigh
+
     # NOTE: currently, fortran dependencies must be installed separately, initially
     # including in pyproject.toml resulted in incorrect installation paths.
     # More work required to get the pip dependencies working properly for fortran
@@ -96,8 +100,8 @@ Test geocolor installation
 
     # Ensure GeoIPS Python environment is enabled.
 
-    # This script will run ALL tests within this package
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/test_all.sh
+    # This will run ALL tests within this package
+    pytest -m integration $GEOIPS_PACKAGES_DIR/geocolor
 
     # Individual direct test calls, for reference
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_global.sh

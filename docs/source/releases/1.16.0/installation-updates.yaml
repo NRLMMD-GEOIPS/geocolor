@@ -3,7 +3,7 @@ installation:
   description: |
     Updated README.md to include most recent instructions for installing GeoColor
     correctly. Makes use of updated CLI commands and recently public packages needed
-    for GeoColor. Addititionally, this PR updated test scripts to make use of the new
+    for GeoColor. Additionally, this PR updated test scripts to make use of the new
     test_data_geocolor datasets.
   files:
     deleted:
