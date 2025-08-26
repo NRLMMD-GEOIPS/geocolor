@@ -97,15 +97,6 @@ def normalize_ir_by_abslats(ir, lats):
     abslats[abslats < 30.0] = 30.0
     abslats[abslats > 60.0] = 60.0
 
-    # maxir = 300.0
-    # mnil = 210.0
-    # mnih = 230.0
-    # minir = mnil + 20.0 * (abslats - 30.0) / (60.0 - 30.0)
-    # # IDL GeoColor code sets min/max values to mnil/mnih
-    # minir[minir < mnil] = mnil
-    # minir[minir < mnih] = mnih
-    # normir = (ir - minir) / (maxir - minir)
-
     minir = 170 + 30.0 * (abslats - 30.0) / (60.0 - 30.0)
     normir = (ir - minir) / (300.0 - minir)
 
@@ -241,13 +232,11 @@ def call(xobj):
 
     # Compute nighttime side
     log.info("Computing nighttime side.")
-    min_sunzen = 75.0
-    max_sunzen = 85.0
+    min_sunzen = 85.0
+    max_sunzen = 90.0
     min_elev = 0.0
     # Max elevation/bathymetry = 50,000 in IDL GeoColor code
-    max_elev = 50_000.0  # 200000.0
-    # min_fmt_lnd = 1.0
-    # max_fmt_lnd = 4.5
+    max_elev = 50_000.0
 
     # Make ls_mask binary with Land (and Coast) == Ture and Water == False
     # In the original mask: Land == 1, coast == 2
@@ -261,8 +250,7 @@ def call(xobj):
     )
 
     # Normalize
-    # Why are we raising to power of 1.5? It was in the GeoColor IDL counterpart
-    sunzen = (1.0 - normalize(sunzen, min_sunzen, max_sunzen)) ** 1.5
+    sunzen = 1.0 - normalize(sunzen, min_sunzen, max_sunzen)
     norm_lwir = 1.0 - normalize_ir_by_abslats(lwir, lats) ** 1.1
     elev = normalize(elev, min_elev, max_elev)
     lights = normalize_city_lights(lights)
@@ -307,9 +295,9 @@ def call(xobj):
 
     # Calculate BT difference
     min_diff_lnd = 1.0
-    max_diff_lnd = 4.5
+    max_diff_lnd = 4.0
     min_diff_wat = 0.5
-    max_diff_wat = 4.5
+    max_diff_wat = 4.0
     # lwir => long wave infrared
     # swir => short wave infrared
     btd = lwir - swir
