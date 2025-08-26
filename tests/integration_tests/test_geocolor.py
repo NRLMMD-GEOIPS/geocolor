@@ -22,7 +22,6 @@ full_integ_test_calls = [
     "$repopath/tests/scripts/abi_global.sh",
     "$repopath/tests/scripts/goes_east.sh",
     "$repopath/tests/scripts/goes_west.sh",
-    #"$repopath/tests/scripts/himawari.sh",
     "$repopath/tests/scripts/ami.sh",
     "$repopath/tests/scripts/fci.sh",
     "$repopath/tests/scripts/abi_global.sh",
