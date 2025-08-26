@@ -8,6 +8,8 @@ installation:
   files:
     deleted:
       - tests/scripts/himawari.sh
+      - tests/install_test_data.sh
+      - tests/test_all.sh
     modified:
       - tests/scripts/abi.sh
       - tests/scripts/abi_global.sh
@@ -16,7 +18,7 @@ installation:
       - tests/scripts/fci.sh
       - tests/scripts/goes_east.sh
       - tests/scripts/goes_west.sh
-      - tests/test_all.sh
+      - README.md
   related-issue:
     number: null
     repo_url: ''
