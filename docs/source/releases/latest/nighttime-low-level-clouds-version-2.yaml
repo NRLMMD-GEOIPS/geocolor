@@ -8,9 +8,10 @@ enhancement:
     moved:
     - ''
     added:
-    - ''
+    - 'docs/source/releases/latest/nighttime-low-level-clouds-version-2.yaml'
     modified:
-    - ''
+    - 'README.md'
+    - 'geocolor/plugins/modules/algorithms/visir/GeoColor.py'
   related-issue:
     number: 12
     repo_url: 'https://github.com/NRLMMD-GEOIPS/geocolor'
