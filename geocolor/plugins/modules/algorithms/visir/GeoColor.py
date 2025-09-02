@@ -4,7 +4,7 @@
 """GeoColor algorithm."""
 
 # Python Standard Libraries
-from math import log10
+from math import log10, erf
 import logging
 
 # Installed Libraries
@@ -232,8 +232,8 @@ def call(xobj):
 
     # Compute nighttime side
     log.info("Computing nighttime side.")
-    min_sunzen = 85.0
-    max_sunzen = 90.0
+    min_sunzen = 75.0
+    max_sunzen = 85.0
     min_elev = 0.0
     # Max elevation/bathymetry = 50,000 in IDL GeoColor code
     max_elev = 50_000.0
@@ -294,9 +294,9 @@ def call(xobj):
     # NOTE: This is where false alarm checks would go with CCBG (see steve's code)
 
     # Calculate BT difference
-    min_diff_lnd = 1.0
+    min_diff_lnd = 0.0
     max_diff_lnd = 4.0
-    min_diff_wat = 0.5
+    min_diff_wat = 0.0
     max_diff_wat = 4.0
     # lwir => long wave infrared
     # swir => short wave infrared
