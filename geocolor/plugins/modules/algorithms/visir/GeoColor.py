@@ -4,7 +4,7 @@
 """GeoColor algorithm."""
 
 # Python Standard Libraries
-from math import log10, erf
+from math import log10
 import logging
 
 # Installed Libraries
