@@ -3,7 +3,7 @@
 # # # This source code is subject to the license referenced at
 # # # https://github.com/NRLMMD-GEOIPS.
 
-run_procflow $GEOIPS_TESTDATA_DIR/test_data_ahi_day/data/20200405_0000/* \
+run_procflow $GEOIPS_TESTDATA_DIR/test_data_ahi/data/20200405_0000/* \
           --procflow single_source \
           --reader_name ahi_hsd \
           --resampled_read \
