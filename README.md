@@ -47,13 +47,9 @@ The instructions below will install:
   - rayleigh
   - geocolor
 - Ancillary Datasets:
-  - bluemarble
   - city_lights
   - elevation
-  - emiss
-  - lunarref
   - lw_mask
-  - merra
   - rayleigh
   - synth_green
 
@@ -92,13 +88,9 @@ The instructions below will install:
     pip install -e $GEOIPS_PACKAGES_DIR/geocolor
 
     # Install ancillary datasets needed for GeoColor
-    geoips config install bluemarble --outdir $GEOIPS_ANCILDAT
     geoips config install city_lights --outdir $GEOIPS_ANCILDAT
     geoips config install elevation --outdir $GEOIPS_ANCILDAT
-    geoips config install emiss --outdir $GEOIPS_ANCILDAT
-    geoips config install lunarref --outdir $GEOIPS_ANCILDAT
     geoips config install lw_mask --outdir $GEOIPS_ANCILDAT
-    geoips config install merra --outdir $GEOIPS_ANCILDAT
     geoips config install rayleigh --outdir $GEOIPS_ANCILDAT
     geoips config install synth_green --outdir $GEOIPS_ANCILDAT
 
