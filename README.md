@@ -21,27 +21,41 @@ the day, and enhanced infrared imagery at night.
 
 System Requirements
 ---------------------
+The following are required prior to following the installation instructions below.
+We intend to improve this installation process in the near future.
 
-* geoips >= 1.15.0
-* Test data repos contained in $GEOIPS_TESTDATA_DIR for tests to pass.
-* fortran_utils
-* ancildat
-* true_color >= 1.15.0
+Click each package for installation instructions.
 
-IF REQUIRED: Install base geoips package
-------------------------------------------------------------
-SKIP IF YOU HAVE ALREADY INSTALLED BASE GEOIPS ENVIRONMENT
-
-If GeoIPS Base is not yet installed, follow the
-[installation instructions](https://github.com/NRLMMD-GEOIPS/geoips#installation)
-within the geoips source repo documentation:
+* [GNU make](https://www.gnu.org/software/make/)
+* [gfortran](https://fortran-lang.org/learn/os_setup/install_gfortran/)
+* [geoips >= 1.15.0](https://github.com/NRLMMD-GEOIPS/geoips#installation)
 
 Install geocolor package
 ------------------------
+The instructions below describe how to install the GeoColor GeoIPS plugin.
+
 GeoColor is dissimilar to other GeoIPS packages. It's dependent on multiple other plugin
 packages, most of which contain static datasets or fortran functionality that is
 required to produce GeoColor. We apologize for the inconvenience and are working on
 making the installation process much easier in the future.
+
+The instructions below will install:
+- GeoIPS Plugin Packages:
+  - fortran_utils
+  - ancildat
+  - synth_green
+  - rayleigh
+  - geocolor
+- Ancillary Datasets:
+  - bluemarble
+  - city_lights
+  - elevation
+  - emiss
+  - lunarref
+  - lw_mask
+  - merra
+  - rayleigh
+  - synth_green
 
 ```bash
 
