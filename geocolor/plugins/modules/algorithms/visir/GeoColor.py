@@ -216,6 +216,49 @@ def apply_day_tone_curve(true_color):
     return out
 
 
+def extend_day_into_twilight(
+        true_color,
+        sunzen_deg,
+        zen_lthr=80.0,
+        zen_uthr=88.0,
+        preband_deg=4.0,
+        center_frac=0.60,
+        softness_frac=0.20,
+        max_gain=0.25):
+    """Boost TrueColor near the terminator so it reads a little farther into twilight.
+
+    ERF weighting runs from [zen_lthr - preband_deg, zen_uthr]. Darker midtones get more lift.
+    """
+    band_min = max(0.0, float(zen_lthr) - preband_deg)
+    band_max = float(zen_uthr)
+    band_width = max(1e-6, band_max - band_min)
+
+    t = (sunzen_deg - band_min) / band_width
+    t = np.clip(t, 0.0, 1.0)
+
+    z = (t - center_frac) / (np.sqrt(2.0) * softness_frac)
+    boost_weight = 0.5 * (1.0 + erf(z))
+    boost_weight = np.clip(boost_weight, 0.0, 1.0)
+
+    day_or_twilight = sunzen_deg <= zen_uthr
+    boost_weight = np.where(day_or_twilight, boost_weight, 0.0)
+
+    r = np.ma.array(true_color["RED"])
+    g = np.ma.array(true_color["GRN"])
+    b = np.ma.array(true_color["BLU"])
+    luma = 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+    scale = 1.0 + max_gain * boost_weight * (1.0 - luma.filled(0.0))
+
+    out = {}
+    for ch in ("RED","GRN","BLU"):
+        arr = np.ma.array(true_color[ch], copy=True)
+        arr[day_or_twilight] = np.clip(arr[day_or_twilight] * scale[day_or_twilight], 0.0, 1.0)
+        out[ch] = arr
+
+    return out
+
+
 def call(xobj):
     """Geo Color algorithm."""
     # Get the appropriate variable name map for the input data file based on sensor name
@@ -286,11 +329,12 @@ def call(xobj):
         true_color = compute_true_color(ref)
 
     true_color = apply_day_tone_curve(true_color)
+    true_color = extend_day_into_twilight(true_color, sunzen)
 
     # Nighttime side
     log.info("Computing nighttime side.")
-    min_sunzen = 75.0
-    max_sunzen = 85.0
+    # min_sunzen = 75.0
+    # max_sunzen = 85.0
     min_elev = 0.0
     max_elev = 50_000.0  # elevation/bathymetry cap from IDL
 
@@ -372,42 +416,6 @@ def call(xobj):
     # Blend with True Color
     log.info("Blend daytime with nighttime across terminator.")
     good_bt = np.logical_or(lwir > 150.0, lwir < 360.0)
-
-    # --- Day-side visual extension into twilight (apply before day write) ---
-    # Boost TrueColor near the terminator so it reads a little farther into twilight.
-    # ERF weighting runs from [zen_lthr - preband_deg, zen_uthr]. Darker midtones get more lift.
-    preband_deg = 4.0  # how far before zen_lthr to start boosting day (try 3.0..6.0)
-    band_min = max(0.0, float(zen_lthr) - preband_deg)
-    band_max = float(zen_uthr)
-    band_width = max(1e-6, band_max - band_min)
-
-    t = (sunzen - band_min) / band_width
-    t = np.clip(t, 0.0, 1.0)
-
-    center_frac = 0.60  # push the center toward night a bit
-    softness_frac = 0.20  # softness of the roll-off
-    z = (t - center_frac) / (np.sqrt(2.0) * softness_frac)
-
-    boost_weight = 0.5 * (1.0 + erf(z))
-    boost_weight = np.clip(boost_weight, 0.0, 1.0)
-
-    day_or_twilight = np.logical_or(day_mask, twilight_mask)
-    boost_weight = np.where(day_or_twilight, boost_weight, 0.0)
-
-    # Luma-weighted boost to avoid blowing out bright clouds
-    r = np.ma.array(true_color["RED"])
-    g = np.ma.array(true_color["GRN"])
-    b = np.ma.array(true_color["BLU"])
-    luma = 0.2126 * r + 0.7152 * g + 0.0722 * b
-
-    max_gain = 0.25  # keep conservative to avoid wash-out
-    scale = 1.0 + max_gain * boost_weight * (1.0 - luma.filled(0.0))
-
-    for ch in ("RED", "GRN", "BLU"):
-        arr = np.ma.array(true_color[ch], copy=True)
-        arr[day_or_twilight] = np.clip(arr[day_or_twilight] * scale[day_or_twilight], 0.0, 1.0)
-        true_color[ch] = arr
-    # --- end day-side extension ---
 
     # Day-only write
     valid_day = np.logical_and(day_mask, good_bt)
