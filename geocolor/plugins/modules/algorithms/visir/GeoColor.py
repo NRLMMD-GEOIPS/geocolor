@@ -178,12 +178,12 @@ def apply_day_tone_curve(true_color):
     luma = 0.2126 * r + 0.7152 * g + 0.0722 * b
 
     # 1) Shadow lift (gamma < 1 brightens darks slightly)
-    shadow_gamma = 0.95
+    shadow_gamma = 0.9
     luma_lifted = luma ** shadow_gamma
 
     # 2) Soft highlight roll-off using a smooth knee
-    knee_start = 0.79  # where compression starts
-    shoulder_strength = 1.6  # >0 increases compression steepness
+    knee_start = 0.78  # where compression starts
+    shoulder_strength = 1.5  # >0 increases compression steepness
 
     valid = np.logical_not(np.ma.getmaskarray(luma))
 
@@ -276,7 +276,7 @@ def call(xobj):
 
     ref = rayleigh(xobj)
 
-    # Compute True Color for daytime side
+    # Daytime True Color
     log.info("Computing true color.")
     if xobj.source_name in ["ahi", "fci"]:
         true_color = compute_ahi_true_color(ref)
@@ -287,13 +287,12 @@ def call(xobj):
 
     true_color = apply_day_tone_curve(true_color)
 
-    # Compute nighttime side
+    # Nighttime side
     log.info("Computing nighttime side.")
     min_sunzen = 75.0
     max_sunzen = 85.0
     min_elev = 0.0
-    # Max elevation/bathymetry = 50,000 in IDL GeoColor code
-    max_elev = 50_000.0
+    max_elev = 50_000.0  # elevation/bathymetry cap from IDL
 
     # Make ls_mask binary with Land (and Coast) == Ture and Water == False
     # In the original mask: Land == 1, coast == 2
@@ -306,18 +305,18 @@ def call(xobj):
         0.0  # set elev = 0 where bin_ls_mask = False (i.e., not over land and coast)
     )
 
-    # Normalize
-    sunzen_norm = 1.0 - normalize(sunzen.copy(), min_sunzen, max_sunzen)
+    # Normalizations
     norm_lwir = 1.0 - normalize_ir_by_abslats(lwir, lats) ** 1.1
     elev = normalize(elev, min_elev, max_elev)
     lights = normalize_city_lights(lights)
 
+    # RGB buffers
     # Start building color guns
     red = np.empty(norm_lwir.shape)
     grn = np.empty(norm_lwir.shape)
     blu = np.empty(norm_lwir.shape)
 
-    # Add in the city lights
+    # City lights
     # Lights threshold for IDL GeoColor code = 0.2
     good_lights = lights > 0.2
     gl = good_lights
@@ -363,26 +362,60 @@ def call(xobj):
     btd[bin_ls_mask] = normalize(btd[bin_ls_mask], min_diff_lnd, max_diff_lnd)
     btd[~bin_ls_mask] = normalize(btd[~bin_ls_mask], min_diff_wat, max_diff_wat)
 
-    # Create the three masks for each discrete segment
+    # Day/night/twilight masks
     zen_lthr = 80
     zen_uthr = 88
     day_mask = sunzen <= zen_lthr
     night_mask = sunzen >= zen_uthr
     twilight_mask = np.logical_and(sunzen > zen_lthr, sunzen < zen_uthr)
 
-    # shell()
-
     # Blend with True Color
     log.info("Blend daytime with nighttime across terminator.")
     good_bt = np.logical_or(lwir > 150.0, lwir < 360.0)
 
-    # Just true_color output (day)
+    # --- Day-side visual extension into twilight (apply before day write) ---
+    # Boost TrueColor near the terminator so it reads a little farther into twilight.
+    # ERF weighting runs from [zen_lthr - preband_deg, zen_uthr]. Darker midtones get more lift.
+    preband_deg = 4.0  # how far before zen_lthr to start boosting day (try 3.0..6.0)
+    band_min = max(0.0, float(zen_lthr) - preband_deg)
+    band_max = float(zen_uthr)
+    band_width = max(1e-6, band_max - band_min)
+
+    t = (sunzen - band_min) / band_width
+    t = np.clip(t, 0.0, 1.0)
+
+    center_frac = 0.60  # push the center toward night a bit
+    softness_frac = 0.20  # softness of the roll-off
+    z = (t - center_frac) / (np.sqrt(2.0) * softness_frac)
+
+    boost_weight = 0.5 * (1.0 + erf(z))
+    boost_weight = np.clip(boost_weight, 0.0, 1.0)
+
+    day_or_twilight = np.logical_or(day_mask, twilight_mask)
+    boost_weight = np.where(day_or_twilight, boost_weight, 0.0)
+
+    # Luma-weighted boost to avoid blowing out bright clouds
+    r = np.ma.array(true_color["RED"])
+    g = np.ma.array(true_color["GRN"])
+    b = np.ma.array(true_color["BLU"])
+    luma = 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+    max_gain = 0.25  # keep conservative to avoid wash-out
+    scale = 1.0 + max_gain * boost_weight * (1.0 - luma.filled(0.0))
+
+    for ch in ("RED", "GRN", "BLU"):
+        arr = np.ma.array(true_color[ch], copy=True)
+        arr[day_or_twilight] = np.clip(arr[day_or_twilight] * scale[day_or_twilight], 0.0, 1.0)
+        true_color[ch] = arr
+    # --- end day-side extension ---
+
+    # Day-only write
     valid_day = np.logical_and(day_mask, good_bt)
     red[valid_day] = true_color["RED"][valid_day]
     grn[valid_day] = true_color["GRN"][valid_day]
     blu[valid_day] = true_color["BLU"][valid_day]
 
-    # Just nighttime output
+    # Night-only write
     valid_night = np.logical_and(night_mask, good_bt)
     red[valid_night] = norm_lwir[valid_night] + (1.0 - norm_lwir[valid_night]) * (
         0.55 * btd[valid_night] + (1.0 - btd[valid_night]) * red[valid_night]
@@ -394,7 +427,7 @@ def call(xobj):
         0.98 * btd[valid_night] + (1.0 - btd[valid_night]) * blu[valid_night]
     )
 
-    # Blended twilight output (ERF-weighted inside [zen_lthr, zen_uthr])
+    # Blended twilight output (ERF-weighted within [zen_lthr, zen_uthr])
     valid_twilight = np.logical_and(twilight_mask, good_bt)
     vt = valid_twilight
 
@@ -406,9 +439,9 @@ def call(xobj):
     t = (sunzen[vt] - tw_min_deg) / tw_width_deg
     t = np.clip(t, 0.0, 1.0)
 
-    # Center and softness: center_frac=0.5 is symmetric; positive shift extends day into night
-    center_frac = 0.55  # try 0.50..0.60 to taste
-    sigma_frac = 0.18   # smaller=sharper edge, larger=softer; try 0.12..0.25
+    # center_frac > 0.5 pushes day a bit deeper into night
+    center_frac = 0.55
+    sigma_frac = 0.18
 
     z = (t - center_frac) / (np.sqrt(2.0) * sigma_frac)
 
@@ -416,12 +449,12 @@ def call(xobj):
     day_weight = np.clip(day_weight, 0.0, 1.0)
     night_weight = 1.0 - day_weight
 
-    # Build night-side RGB for the twilight pixels
+    # Night RGB for the twilight pixels
     night_r = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (0.55 * btd[vt] + (1.0 - btd[vt]) * red[vt])
     night_g = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (0.75 * btd[vt] + (1.0 - btd[vt]) * grn[vt])
     night_b = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (0.98 * btd[vt] + (1.0 - btd[vt]) * blu[vt])
 
-    # ERF blend: continuous with day at tw_min and with night at tw_max
+    # Continuous at tw_min/tw_max
     red[vt] = day_weight * true_color["RED"][vt] + night_weight * night_r
     grn[vt] = day_weight * true_color["GRN"][vt] + night_weight * night_g
     blu[vt] = day_weight * true_color["BLU"][vt] + night_weight * night_b
