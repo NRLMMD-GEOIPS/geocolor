@@ -11,9 +11,6 @@ import logging
 # Installed Libraries
 import numpy as np
 
-# TODO: Remove debug line
-from ipdb import set_trace as shell
-
 # from .synthetic_green import synthetic_green
 
 log = logging.getLogger(__name__)
@@ -179,7 +176,7 @@ def apply_day_tone_curve(true_color):
 
     # 1) Shadow lift (gamma < 1 brightens darks slightly)
     shadow_gamma = 0.9
-    luma_lifted = luma ** shadow_gamma
+    luma_lifted = luma**shadow_gamma
 
     # 2) Soft highlight roll-off using a smooth knee
     knee_start = 0.78  # where compression starts
@@ -195,10 +192,14 @@ def apply_day_tone_curve(true_color):
     w = t * t * (3.0 - 2.0 * t)
 
     # Target curve keeps 1.0 -> 1.0 while compressing just above the knee
-    target_vals = knee_start + (1.0 - knee_start) * np.power(t[valid], 1.0 + shoulder_strength)
+    target_vals = knee_start + (1.0 - knee_start) * np.power(
+        t[valid], 1.0 + shoulder_strength
+    )
 
     luma_toned = np.ma.array(luma_lifted, copy=True)
-    luma_toned[valid] = luma_lifted[valid] + w[valid] * (target_vals - luma_lifted[valid])
+    luma_toned[valid] = luma_lifted[valid] + w[valid] * (
+        target_vals - luma_lifted[valid]
+    )
 
     # Preserve color by scaling RGB by the luma ratio (with safe denom)
     eps = 1e-6
@@ -217,17 +218,19 @@ def apply_day_tone_curve(true_color):
 
 
 def extend_day_into_twilight(
-        true_color,
-        sunzen_deg,
-        zen_lthr=80.0,
-        zen_uthr=88.0,
-        preband_deg=4.0,
-        center_frac=0.60,
-        softness_frac=0.20,
-        max_gain=0.25):
+    true_color,
+    sunzen_deg,
+    zen_lthr=80.0,
+    zen_uthr=88.0,
+    preband_deg=4.0,
+    center_frac=0.60,
+    softness_frac=0.20,
+    max_gain=0.25,
+):
     """Boost TrueColor near the terminator so it reads a little farther into twilight.
 
-    ERF weighting runs from [zen_lthr - preband_deg, zen_uthr]. Darker midtones get more lift.
+    ERF weighting runs from [zen_lthr - preband_deg, zen_uthr].
+    Darker midtones get more lift.
     """
     band_min = max(0.0, float(zen_lthr) - preband_deg)
     band_max = float(zen_uthr)
@@ -251,9 +254,11 @@ def extend_day_into_twilight(
     scale = 1.0 + max_gain * boost_weight * (1.0 - luma.filled(0.0))
 
     out = {}
-    for ch in ("RED","GRN","BLU"):
+    for ch in ("RED", "GRN", "BLU"):
         arr = np.ma.array(true_color[ch], copy=True)
-        arr[day_or_twilight] = np.clip(arr[day_or_twilight] * scale[day_or_twilight], 0.0, 1.0)
+        arr[day_or_twilight] = np.clip(
+            arr[day_or_twilight] * scale[day_or_twilight], 0.0, 1.0
+        )
         out[ch] = arr
 
     return out
@@ -458,9 +463,15 @@ def call(xobj):
     night_weight = 1.0 - day_weight
 
     # Night RGB for the twilight pixels
-    night_r = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (0.55 * btd[vt] + (1.0 - btd[vt]) * red[vt])
-    night_g = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (0.75 * btd[vt] + (1.0 - btd[vt]) * grn[vt])
-    night_b = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (0.98 * btd[vt] + (1.0 - btd[vt]) * blu[vt])
+    night_r = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (
+        0.55 * btd[vt] + (1.0 - btd[vt]) * red[vt]
+    )
+    night_g = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (
+        0.75 * btd[vt] + (1.0 - btd[vt]) * grn[vt]
+    )
+    night_b = norm_lwir[vt] + (1.0 - norm_lwir[vt]) * (
+        0.98 * btd[vt] + (1.0 - btd[vt]) * blu[vt]
+    )
 
     # Continuous at tw_min/tw_max
     red[vt] = day_weight * true_color["RED"][vt] + night_weight * night_r
