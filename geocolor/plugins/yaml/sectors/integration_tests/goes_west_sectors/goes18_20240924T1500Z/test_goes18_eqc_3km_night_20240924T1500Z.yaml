@@ -1,0 +1,57 @@
+interface: sectors
+family: area_definition_static
+name: test_goes18_eqc_3km_night_20240924T1500Z
+docstring: |
+  The test datasets corresponding to these sectors can be found in the test_data_geocolor test data.
+
+  ```
+  geoips config install-github test_data_geocolor
+  ```
+
+  GOES West subsector, centered at 19 latitude, -154 longitude
+  300x300 at 3km resolution
+
+  This sector covers part of Hawaii, containing approximately have land and 
+  half ocean pixels for GOES West.
+  It is a very small sector that can be used for GOES West processing
+  using the Geocolor dataset 20240924T1500Z from CIRA.
+
+metadata:
+  region:
+    continent: Tests
+    country: x
+    area: Goes_West
+    subarea: x
+    state: x
+    city: x
+spec:
+  area_id: test_goes18_eqc_3km_night_20240924T1500Z
+  description: |
+    The test datasets corresponding to these sectors can be found in the test_data_geocolor test data.
+
+    ```
+    geoips config install-github test_data_geocolor
+    ```
+
+    GOES West subsector, centered at 19 latitude, -154 longitude
+    300x300 at 3km resolution
+
+    This sector covers part of Hawaii, containing approximately have land and 
+    half ocean pixels for GOES West.
+    It is a very small sector that can be used for GOES West processing
+    using the Geocolor dataset 20240924T1500Z from CIRA.
+
+
+  projection:
+    a: 6371228.0
+    lat_0: 19
+    lon_0: -154
+    proj: eqc
+    units: m
+  resolution:
+    - 3000
+    - 3000
+  shape:
+    height: 300
+    width: 300
+  center: [0, 0]
