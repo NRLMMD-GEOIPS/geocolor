@@ -40,17 +40,9 @@ tiny_sector_overlay_integ_test_calls = [
     # ### meteorological features within the dataset.
     ##################################################################################
     # goes18 20240924T1500Z
-    "geoips test sector --overlay test_goes18_eqc_10km_edge_day_20240924T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
-    "geoips test sector --overlay test_goes18_eqc_10km_edge_night_20240924T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
-    "geoips test sector --overlay test_goes18_eqc_3km_day_20240924T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
-    "geoips test sector --overlay test_goes18_eqc_3km_night_20240924T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
     "geoips test sector --overlay test_goes18_eqc_10km_terminator_20240924T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
     # goes16 20240920T1500Z
-    "geoips test sector --overlay test_goes16_eqc_10km_edge_day_20240920T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
-    "geoips test sector --overlay test_goes16_eqc_10km_edge_night_20240920T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
     "geoips test sector --overlay test_goes16_eqc_10km_terminator_20240920T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
-    "geoips test sector --overlay test_goes16_eqc_3km_day_20240920T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
-    "geoips test sector --overlay test_goes16_eqc_3km_night_20240920T1500Z -o $GEOIPS_OUTDIRS/example_test_imagery_outputs ",  # noqa: E501
 ]
 
 
@@ -66,40 +58,7 @@ tiny_sector_integ_test_calls = [
     # Tiny sector for GOES-18 edge/terminator 10km
     (
         "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
-        "test_goes18_eqc_10km_edge_day_20240924T1500Z "
-        "abi_netcdf "
-        "GeoColor "
-        "geocolor "
-        "$GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes18/20240924.1500/OR_ABI-L1b-RadF-M6C*"  # noqa: E501
-    ),
-    (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
-        "test_goes18_eqc_10km_edge_night_20240924T1500Z "
-        "abi_netcdf "
-        "GeoColor "
-        "geocolor "
-        "$GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes18/20240924.1500/OR_ABI-L1b-RadF-M6C*"  # noqa: E501
-    ),
-    (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
         "test_goes18_eqc_10km_terminator_20240924T1500Z "
-        "abi_netcdf "
-        "GeoColor "
-        "geocolor "
-        "$GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes18/20240924.1500/OR_ABI-L1b-RadF-M6C*"  # noqa: E501
-    ),
-    # Tiny sector for GOES-18 3km day/night
-    (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
-        "test_goes18_eqc_3km_day_20240924T1500Z "
-        "abi_netcdf "
-        "GeoColor "
-        "geocolor "
-        "$GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes18/20240924.1500/OR_ABI-L1b-RadF-M6C*"  # noqa: E501
-    ),
-    (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
-        "test_goes18_eqc_3km_night_20240924T1500Z "
         "abi_netcdf "
         "GeoColor "
         "geocolor "
@@ -108,40 +67,7 @@ tiny_sector_integ_test_calls = [
     # Tiny Sectors for GOES-16 edge/terminator 10km
     (
         "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
-        "test_goes16_eqc_10km_edge_day_20240920T1500Z "
-        "abi_netcdf "
-        "GeoColor "
-        "geocolor "
-        "$GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes16/20240920.1500/*"  # noqa: E501
-    ),
-    (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
-        "test_goes16_eqc_10km_edge_night_20240920T1500Z "
-        "abi_netcdf "
-        "GeoColor "
-        "geocolor "
-        "$GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes16/20240920.1500/*"  # noqa: E501
-    ),
-    (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
         "test_goes16_eqc_10km_terminator_20240920T1500Z "
-        "abi_netcdf "
-        "GeoColor "
-        "geocolor "
-        "$GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes16/20240920.1500/*"  # noqa: E501
-    ),
-    # Tiny sectors for GOES-16 3km
-    (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
-        "test_goes16_eqc_3km_day_20240920T1500Z "
-        "abi_netcdf "
-        "GeoColor "
-        "geocolor "
-        "$GEOIPS_TESTDATA_DIR/test_data_geocolor/data/goes16/20240920.1500/*"  # noqa: E501
-    ),
-    (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
-        "test_goes16_eqc_3km_night_20240920T1500Z "
         "abi_netcdf "
         "GeoColor "
         "geocolor "
