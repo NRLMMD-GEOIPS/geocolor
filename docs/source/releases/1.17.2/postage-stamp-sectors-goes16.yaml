@@ -12,8 +12,9 @@ testing:
       Test-ABI-B13-Day-Night products rather than GeoColor. The tiny sector test
       scripts are testing the tiny sectors themselves, not the algorithm in the
       current plugin repo, so use the low resolution single channel product for
-      testing the tiny sectors.
-   
+      testing the tiny sectors rather than the 4 channel high resolution GeoColor
+      product.
+
     To make integration tests more efficient, create a standard set of test sectors that can be used for
     specific integration test cases. This will include
     
