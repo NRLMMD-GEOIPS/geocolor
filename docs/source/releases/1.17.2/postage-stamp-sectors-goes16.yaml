@@ -2,10 +2,12 @@ testing:
 - title: 'Add small sectors to use in integration tests'
   description: |
     NOTE - this layout will be modified within the 1.17.2 release.
+    
     * An update will be pushed prior to tagging 1.17.2 that leaves only a single
-      terminator tiny sector for plugin repo tiny sectors (day or night if terminator
-      doesn't exist), while the full suite of tiny sectors only exists for a single
-      dataset per geostationary satellite in the main geoips repo.
+      terminator tiny sector for each satellite for plugin repo tiny sectors
+      (day or night if terminator doesn't exist), while the full suite of
+      tiny sectors only exists for a single dataset per geostationary
+      satellite in the main geoips repo.
     * An update will be pushed prior to tagging to 1.17.2 in both geoips repo and
       plugin repos to use consistent Test-SENSOR-VAR-Day-Night products in tiny sector
       tests. These tiny sector test outputs will be updated to use the
