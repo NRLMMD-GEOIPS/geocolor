@@ -1,0 +1,72 @@
+interface: sectors
+family: area_definition_static
+name: test_goes16_eqc_10km_terminator_20240920T1500Z
+docstring: |
+  The test datasets corresponding to these sectors can be found in the
+  test_data_geocolor test data repository.
+
+  ```
+  geoips config install test_data_geocolor
+  ```
+
+  GOES East subsector, centered at 30 latitude, -130 longitude,
+  300x300 at 10km resolution.
+
+  This is a very small sector that will contain both day-time and night-time
+  data when used with the GOES-16 day/night dataset at 20240920T1500Z.
+
+  This sector is over the Pacific Ocean off the Western United States,
+  containing mostly ocean pixels for GOES-16 and some pixels over the western
+  United States.
+
+  This sector contains both day-time and night-time data.  This dataset
+  contains very little night-time data, only a small sliver over the western
+  edge of scan. This sector was designed to include approximately
+  two thirds day-time data (eastern side of sector) and one third night-time
+  data (western side of sector).
+metadata:
+  region:
+    continent: Tests
+    country: x
+    area: Goes_East
+    subarea: x
+    state: x
+    city: x
+spec:
+  area_id: test_goes16_eqc_10km_terminator_20240920T1500Z
+  description: |
+    The test datasets corresponding to these sectors can be found in the
+    test_data_geocolor test data repository.
+
+    ```
+    geoips config install test_data_geocolor
+    ```
+
+    GOES East subsector, centered at 30 latitude, -130 longitude,
+    300x300 at 10km resolution.
+
+    This is a very small sector that will contain both day-time and night-time
+    data when used with the GOES-16 day/night dataset at 20240920T1500Z.
+
+    This sector is over the Pacific Ocean off the Western United States,
+    containing mostly ocean pixels for GOES-16 and some pixels over the western
+    United States.
+
+    This sector contains both day-time and night-time data.  This dataset
+    contains very little night-time data, only a small sliver over the western
+    edge of scan. This sector was designed to include approximately
+    two thirds day-time data (eastern side of sector) and one third night-time
+    data (western side of sector).
+  projection:
+    a: 6371228.0
+    lat_0: 30
+    lon_0: -130
+    proj: eqc
+    units: m
+  resolution:
+    - 10000
+    - 10000
+  shape:
+    height: 300
+    width: 300
+  center: [0, 0]

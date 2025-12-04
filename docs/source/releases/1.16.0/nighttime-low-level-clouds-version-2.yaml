@@ -1,0 +1,32 @@
+enhancement:
+- title: 'Fixing low-level nighttime cloud color'
+  description: |
+    Fixing low-level nighttime clouds to show up light blue instead of pink. This changes the RGB ratios used in GeoColor.py and replaces the comparison test files with new examples.
+  files:
+    deleted:
+    - ''
+    moved:
+    - ''
+    added:
+    - 'docs/source/releases/latest/nighttime-low-level-clouds-version-2.yaml'
+    modified:
+    - 'README.md'
+    - 'geocolor/plugins/modules/algorithms/visir/GeoColor.py'
+    - 'tests/scripts/abi.sh'
+    - 'tests/scripts/abi_global.sh'
+    - 'tests/scripts/ahi.sh'
+    - 'tests/scripts/goes_east.sh'
+    - 'tests/scripts/goes_west.sh'
+    - 'tests/scripts/himawari.sh'
+    - 'tests/outputs/abi/GeoColor_image/20210718_015031_EP062021_abi_goes-17_GeoColor_120kts_100p00_1p0-clean.png'
+    - 'tests/outputs/abi_global/GeoColor_image/20210718.015031.goes-17.abi.GeoColor.global.22p79.noaa.20p0.png'
+    - 'tests/outputs/abi_goes_east/GeoColor_image/20200918.195020.goes-16.abi.GeoColor.goes_east.45p56.noaa.10p0.png'
+    - 'tests/outputs/abi_goes_west/GeoColor_image/20210718.015031.goes-17.abi.GeoColor.goes_west.45p56.noaa.10p0.png'
+    - 'tests/outputs/ahi_himawari/GeoColor_image/20200405.000000.himawari-8.ahi.GeoColor.himawari.60p21.jma.10p0.png'
+    - 'tests/outputs/ahi_himawari/GeoColor_image/20200405.000000.himawari-8.ahi.GeoColor.himawari.60p21.jma.10p0.png'
+  related-issue:
+    number: 12
+    repo_url: 'https://github.com/NRLMMD-GEOIPS/geocolor'
+  date:
+    start: 2025-08-29
+    finish: today

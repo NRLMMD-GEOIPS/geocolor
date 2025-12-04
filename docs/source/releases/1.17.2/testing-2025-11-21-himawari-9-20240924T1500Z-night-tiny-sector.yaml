@@ -1,0 +1,82 @@
+testing:
+  - title: "Add himawari-9 night-only 20240924T1500Z tiny sector to use in integration tests"
+    description: |
+      Summary of changes for this update
+
+      * Add himwari-9 20240924T1500Z night-only tiny sector (no day-time data in dataset).
+      * Remove old full disk himawari test output from 20200405T0000Z
+      * Update himawari.sh test script to use new tiny sector.
+      * Add new tiny sector and datasets to test_tiny_sectors_geocolor.py script (to
+        produce global annotated day/night/both imagery, tiny sector overlays, and
+        a single channel clean imagery output of the actual tiny sector.
+
+      Tiny sector background
+
+      To make integration tests more efficient, create a standard set of tiny test sectors
+      for each geostationary satellite that can be used for specific integration
+      test cases.
+
+      Only the main geoips repo contains a full set of tiny sectors for each
+      geostationary satellite (edge of scan, nadir, land/ocean, full disk,
+      day only, night only, terminator, day edge of scan, night edge of scan),
+      and only a single dataset from each satellite has a complete set of tiny sectors.
+
+      Additional datasets for a given geostationary satellite have only one or two
+      tiny sectors defined. These additional tiny sectors should be defined within
+      the plugin package repository that uses the datasets, or the main geoips
+      repository if the dataset is commonly used by many plugin packages.
+
+      All sectors should include some clouds, some clear sky, some land, and some ocean
+      when possible.
+
+      * REQUIRED - single day and/or night sector
+        (tied to the specific test dataset)
+
+        * terminator if available
+        * else day only if day available,
+        * else night only
+      * OPTIONAL tiny sectors with specific meteorological features
+        (tied to specific test dataset)
+
+        * E.g., sector containing a dust event, etc.  Only needed for very specific
+          datasets.
+
+      Notes on plugin names
+
+      * Plugin names are of the format
+
+        * test_<satellite>_<proj>_<res>_<OPTIONAL:edge|nadir>_<day|night|terminator>_<OPTIONAL:tc|ar|volc>_<YYYYMMDDTHHMMZ>.yaml
+        * E.g., test_goes16_eqc_3km_terminator_20200918T1950Z (dataset specific)
+        * E.g., test_goeseast_eqc_3km_landocean (NOT dataset specific, main geoips repo only)
+      * Parsing sector names is not required, so optional field is fine to include
+        only as needed within the file name.
+      * If we require tracking / using the metadata included in the plugin names,
+        we will add explicit metadata to the plugins themselves that can be used for
+        sorting / searching the available test plugins
+      * If we want to sort differently than the hard coded plugin name order,
+        we will additionally implement sorting within the CLI based on the plugin
+        metadata (we just picked a reasonable order for reasonable sorting)
+      * Filenames for individual test sector plugins SHOULD match the plugin names for
+        consistency and uniqueness.
+      * For now, must manually update area_id and name to match exactly, and must
+        manually update both description and docstring to match exactly.
+        Eventually plugins will be set up to automatically populate area_id and
+        description if they are not set (name and docstring are required), but for
+        now must copy/paste.
+    files:
+      deleted:
+        - "tests/outputs/ahi_himawari/GeoColor_image/20200405.000000.himawari-8.ahi.GeoColor.himawari.60p21.jma.10p0.png"
+      moved:
+        - ""
+      added:
+        - "geocolor/plugins/yaml/sectors/integration_tests/himawari_sectors/himawari9_20240924T1500Z/test_himawari9_eqc_3km_night_20240924T1500Z.yaml"
+        - "tests/integration_tests/tiny_sectors/outputs/test_himawari9_eqc_3km_night_20240924T1500Z_Test-AHI-B13-Night-Only/20240924.150000.himawari-9.ahi.Test-AHI-B13-Night-Only.test_himawari9_eqc_3km_night_20240924T1500Z.100p00.jma.3p0.png"
+        - "tests/outputs/ahi_himawari/GeoColor_image/20240924.150000.himawari-9.ahi.GeoColor.test_himawari9_eqc_3km_night_20240924T1500Z.100p00.jma.3p0.png"
+      modified:
+        - "tests/scripts/himawari.sh"
+        - "tests/integration_tests/test_tiny_sectors_geocolor.py"
+    related-issue:
+      internal: geocolor#53 - himawari9 20240924T1500Z tiny sectors
+    date:
+      start: 2025-11-18
+      finish: 2025-11-24

@@ -1,0 +1,64 @@
+interface: sectors
+family: area_definition_static
+name: test_himawari9_eqc_3km_night_20240924T1500Z
+docstring: |
+  The test datasets corresponding to these sectors can be found in the
+  test_data_geocolor test data repository.
+
+  ```
+  geoips config install test_data_geocolor
+  ```
+
+  Himawari subsector, centered at 11 latitude, 109 longitude,
+  300x300 at 3km resolution
+
+  This is a very small sector that will contain only night-time
+  data when used with the Himawari-9 night-time only dataset at 20240924T1500Z.
+
+  This sector is over Vietnam, containing approximately
+  half land and half ocean pixels for Himawari-9.
+
+  This dataset contains only night-time data, so we were unable to
+  create a terminator sector for this dataset.
+metadata:
+  region:
+    continent: Tests
+    country: x
+    area: Himawari
+    subarea: x
+    state: x
+    city: x
+spec:
+  area_id: test_himawari9_eqc_3km_night_20240924T1500Z
+  description: |
+    The test datasets corresponding to these sectors can be found in the
+    test_data_geocolor test data repository.
+
+    ```
+    geoips config install test_data_geocolor
+    ```
+
+    Himawari subsector, centered at 11 latitude, 109 longitude,
+    300x300 at 3km resolution
+
+    This is a very small sector that will contain only night-time
+    data when used with the Himawari-9 night-time only dataset at 20240924T1500Z.
+
+    This sector is over Vietnam, containing approximately
+    half land and half ocean pixels for Himawari-9.
+
+    This dataset contains only night-time data, so we were unable to
+    create a terminator sector for this dataset.
+  projection:
+    a: 6371228.0
+    lat_0: 11
+    lon_0: 109
+    proj: eqc
+    units: m
+  resolution:
+    - 3000
+    - 3000
+  shape:
+    height: 300
+    width: 300
+  center: [0, 0]

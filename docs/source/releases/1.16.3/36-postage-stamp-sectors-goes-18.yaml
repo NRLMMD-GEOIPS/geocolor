@@ -1,0 +1,102 @@
+testing:
+- title: 'Update existing goes_west test script to use goes-18 tiny sectors, not full disk, and remove duplicate goes west / himawari tests'
+  description: |
+    The whole point of this exercise!  Make the geocolor tests faster!
+  files:
+    deleted:
+    - 'tests/outputs/abi_goes_west/GeoColor_image/20210718.015031.goes-17.abi.GeoColor.goes_west.45p56.noaa.10p0.png'
+    - 'tests/outputs/abi/GeoColor_image/20210718_015031_EP062021_abi_goes-17_GeoColor_120kts_100p00_1p0-clean.png'
+    - 'tests/outputs/abi_global/GeoColor_image/20210718.015031.goes-17.abi.GeoColor.global.22p79.noaa.20p0.png'
+    - 'tests/scripts/abi.sh'
+    - 'tests/scripts/abi_global.sh'
+    - 'tests/scripts/ahi.sh'
+    - 'tests/outputs/ahi/GeoColor_image/20200405_000000_SH252020_ahi_himawari-8_GeoColor_100kts_100p00_1p0-clean.png'
+    moved:
+    - ''
+    added:
+    - ''
+    modified:
+    - 'tests/scripts/goes_west.sh'
+    - 'tests/integration_tests/test_geocolor.py'
+  related-issue:
+    internal: "geocolor#36"
+  date:
+    start: 2025-10-06
+    finish: 2025-10-09
+- title: 'Add dataset specific tiny sectors for geocolor 20240924T1500Z goes-18 dataset'
+  description: |
+    Add edge of scan, terminator, and day/night tiny sectors for the geocolor goes-18
+    20240924T1500Z dataset.
+
+    * edge of scan day-time is at 12 lat -67 lon, over the caribbean with land and ocean pixels.
+    * edge of scan night-time is at 12 lat 153 lon, near micronesia 
+    * terminator image is at 39 lat -125 lon, off coast of alaska
+    * daytime only is at 28 lat -94 lon, off the coast of Texas
+    * night-time only is at 28 lat -160 lon, off the coast of Texas ?
+  files:
+    deleted:
+    - ''
+    moved:
+    - ''
+    added:
+    - 'geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_10km_edge_day_20240924T1500Z.yaml'
+    - 'geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_10km_edge_night_20240924T1500Z.yaml'
+    - 'geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_10km_terminator_20240924T1500Z.yaml'
+    - 'geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_3km_day_20240924T1500Z.yaml'
+    - 'geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_3km_night_20240924T1500Z.yaml'
+    - 'tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_10km_edge_day_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_edge_day_20240924T1500Z.89p37.noaa.10p0.png'
+    - 'tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_10km_edge_night_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_edge_night_20240924T1500Z.89p37.noaa.10p0.png'
+    - 'tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_10km_terminator_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_terminator_20240924T1500Z.100p00.noaa.10p0.png'
+    - 'tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_3km_day_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_3km_day_20240924T1500Z.100p00.noaa.3p0.png'
+    - 'tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_3km_night_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_3km_night_20240924T1500Z.100p00.noaa.3p0.png'
+    - 'tests/outputs/abi_goes_west/GeoColor_image/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_terminator_20240924T1500Z.100p00.noaa.10p0.png'
+    modified:
+    - ''
+  related-issue:
+    internal: "GEOIPS/geocolor#36"
+  date:
+    start: 2025-10-06
+    finish: 2025-10-09
+- title: 'Add test_tiny_sectors_geocolor integration test script with goes-18 20240924T1500Z test script calls'
+  description: |
+    Includes all types of tiny sector and test sector scripts.
+
+    * OPTIONAL marker, no comparison to "correct" imagery
+
+      * 1 test - global_terminator_satzen.sh for goes-18 20240924.1500 Test-Infrared-ABI-B13
+      * 5 tests - geoips test sector for goes-18 20240924T1500Z specific tiny sector overlays
+    * REQUIRED tiny_sector marker, comparison checked against checked in outputs
+
+      * 5 tests - tiny_sectors_geostationary.sh calls for goes-18 20240924.1500 specific tiny sectors
+  files:
+    deleted:
+    - ''
+    moved:
+    - ''
+    added:
+    - ''
+    modified:
+    - 'tests/integration_tests/test_tiny_sectors_geocolor.py'
+  related-issue:
+    internal: "geocolor#36"
+  date:
+    start: 2025-10-09
+    finish: 2025-10-09
+bug fix:
+- title: 'Update geocolor integration test to use the base_setup rather than full_setup'
+  description: |
+    full_setup requires ALL datasets. Just use base_setup.
+  files:
+    deleted:
+    - ''
+    moved:
+    - ''
+    added:
+    - ''
+    modified:
+    - 'tests/integration_tests/test_geocolor.py'
+  related-issue:
+    internal: "geocolor#36"
+  date:
+    start: 2025-10-06
+    finish: 2025-10-09

@@ -1,0 +1,15 @@
+testing:
+  - title: Update to standard geostationary test data repository locations
+    description: |
+      test_data_ahi_day -> test_data_ahi
+      test_data_abi_day -> test_data_abi
+      test_data_mtg_fci_day -> test_data_fci
+      test_data_geokompsat -> test_data_ami
+    files:
+      modified:
+        - tests/scripts/
+    date:
+      start: 2025-07-10
+      finish: 2025-07-10
+    related-issue:
+      internal: GEOIPS#861 - 1.16.2 internal bug fixes

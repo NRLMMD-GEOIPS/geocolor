@@ -1,0 +1,68 @@
+interface: sectors
+family: area_definition_static
+name: test_goes18_eqc_10km_terminator_20240924T1500Z
+docstring: |
+  The test datasets corresponding to these sectors can be found in the
+  test_data_geocolor test data repository.
+
+  ```
+  geoips config install test_data_geocolor
+  ```
+
+  GOES West subsector, centered at 39 latitude, -125 longitude
+  300x300 at 10km resolution
+
+  This is a very small sector that will contain both day-time and night-time
+  data when used with the GOES-18 day/night dataset at 20240924T1500Z.
+
+  This sector is off the coast of California, containing approximately
+  half land and half ocean pixels for GOES West.
+
+  This dataset contains approximately half day-time and half night-time data,
+  with the eastern half of the dataset containing day-time data. This sector
+  was designed to contain a small amount of night-time data along the western
+  edge of the sector, and mostly day-time data.
+metadata:
+  region:
+    continent: Tests
+    country: x
+    area: Goes_West
+    subarea: x
+    state: x
+    city: x
+spec:
+  area_id: test_goes18_eqc_10km_terminator_20240924T1500Z
+  description: |
+    The test datasets corresponding to these sectors can be found in the
+    test_data_geocolor test data repository.
+
+    ```
+    geoips config install test_data_geocolor
+    ```
+
+    GOES West subsector, centered at 39 latitude, -125 longitude
+    300x300 at 10km resolution
+
+    This is a very small sector that will contain both day-time and night-time
+    data when used with the GOES-18 day/night dataset at 20240924T1500Z.
+
+    This sector is off the coast of California, containing approximately
+    half land and half ocean pixels for GOES West.
+
+    This dataset contains approximately half day-time and half night-time data,
+    with the eastern half of the dataset containing day-time data. This sector
+    was designed to contain a small amount of night-time data along the western
+    edge of the sector, and mostly day-time data.
+  projection:
+    a: 6371228.0
+    lat_0: 39
+    lon_0: -125
+    proj: eqc
+    units: m
+  resolution:
+    - 10000
+    - 10000
+  shape:
+    height: 300
+    width: 300
+  center: [0, 0]
