@@ -6,7 +6,7 @@ Release Process:
     added:
     - docs/source/releases/1.16.0/1.16.0-internal-release.yaml
   related-issue:
-    internal: GEOIPS#861 - 1.16.0 updates*
+    internal: geoips#861 - 1.16.0 updates*
   date:
     start: 2025-05-30
     finish: 2025-05-30

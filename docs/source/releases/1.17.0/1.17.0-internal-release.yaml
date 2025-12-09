@@ -1,0 +1,12 @@
+Release Process:
+- title: Add 1.17.0 release note
+  description: |
+    Currently tagged internal version 1.16.3.
+  files:
+    added:
+    - docs/source/releases/1.17.0/1.17.0-internal-release.yaml
+  related-issue:
+    internal: geoips#959 - 1.17.0 updates*
+  date:
+    start: 2025-10-15
+    finish: 2025-10-15

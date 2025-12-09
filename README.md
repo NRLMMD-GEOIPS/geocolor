@@ -30,14 +30,24 @@ Click each package for installation instructions.
 * [gfortran](https://fortran-lang.org/learn/os_setup/install_gfortran/)
 * [geoips >= 1.15.0](https://github.com/NRLMMD-GEOIPS/geoips#installation)
 
+IF REQUIRED: Install base geoips package
+------------------------------------------------------------
+
+SKIP IF YOU HAVE ALREADY INSTALLED BASE GEOIPS ENVIRONMENT
+
+If GeoIPS Base is not yet installed, follow the
+[installation instructions](https://github.com/NRLMMD-GEOIPS/geoips#installation)
+within the geoips source repo documentation:
+
 Install geocolor package
 ------------------------
 The instructions below describe how to install the GeoColor GeoIPS plugin.
 
-GeoColor is dissimilar to other GeoIPS packages. It's dependent on multiple other plugin
-packages, most of which contain static datasets or fortran functionality that is
-required to produce GeoColor. We apologize for the inconvenience and are working on
-making the installation process much easier in the future.
+GeoColor is dependent on multiple GeoIPS plugin
+packages, containing static datasets and fortran functionality
+required to produce GeoColor. Future releases of GeoColor will
+likely remove some of these dependencies,
+streamlining the installation process moving forward.
 
 The instructions below will install:
 - GeoIPS Plugin Packages:
@@ -110,12 +120,9 @@ Test geocolor installation
     pytest -m integration $GEOIPS_PACKAGES_DIR/geocolor
 
     # Individual direct test calls, for reference
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_global.sh
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi.sh
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/ahi.sh
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/ami.sh
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/fci.sh
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_east.sh
     $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/goes_west.sh
-    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/abi_clean.sh
+    $GEOIPS_PACKAGES_DIR/geocolor/tests/scripts/himawari.sh
 ```
