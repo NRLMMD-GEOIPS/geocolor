@@ -17,24 +17,7 @@ global_example_integ_test_calls = [
     ##################################################################################
     # ### Scripts to produce global imagery outputs specifically for diagnostic
     # ### purposes, and identifying day/night/spatial contents of a given dataset.
-    # ###
-    # ### The below script will automatically run the following products
-    # ###   * Test-*-Day-Night
-    # ###   * Test-*-Day-Only
-    # ###   * Test-*-Night-Only
-    # ###
-    # ### With satellite zenith cutoff of
-    # ###   * 70
-    # ###   * null
-    # ###
-    # ### Reprojected to a global domain in an annotated imagery output.
-    # ###
-    # ### Available product names can be found in
-    # ### geoips/plugins/yaml/products/integration_tests/Test-Day-Night.yaml
-    # ### geoips/plugins/yaml/products/integration_tests/Test-Day-Only.yaml
-    # ### geoips/plugins/yaml/products/integration_tests/Test-Night-Only.yaml
-    # ###
-    # ### Product prefix should be passed below as Test-SENSOR-VAR
+    # ### More information in geoips/tests/integration_tests/test_tiny_sector_geoips.py
     ##################################################################################
     (
         "$geoips_repopath/tests/example_scripts/global_terminator_satzen.sh "
@@ -84,31 +67,7 @@ tiny_sector_integ_test_calls = [
     # ### tiny_sectors_geostationary.sh is a wrapper test script to produce the
     # ### specified tiny sector output, and compare it with the stored comparison
     # ### output imagery.
-    # ###
-    # ### It always produces
-    # ### * imagery_clean output
-    # ### * geoips_fname filename formatter,
-    # ### * --compare_path "$GEOIPS_PACKAGES_DIR/${repo_name}/tests/integration_tests/tiny_sectors/outputs/${test_sector_name}_${product_name}"   # noqa: E501
-    # ### * satellite zenith angle cutoff None,
-    # ###
-    # ### with the following arguments passed in:
-    # ###
-    # ### * test_sector_name
-    # ###   * Usually of format test_SATELLITE_PROJ_RES_FEAT_DAYNIGHT_YYYYMMDDTHHMNZ
-    # ###   * e.g. test_goes16_eqc_3km_edge_day_20200918T1950Z
-    # ###   * e.g. test_goeswest_eqc_3km_nadir
-    # ### * reader_name
-    # ### * product_name
-    # ###   * Test-*-Day-Only, or -Night-Only for efficiency
-    # ###     reasons, consistency, and quickly identifying
-    # ###     the terminator location
-    # ### * repo_name
-    # ### * data_files
-    # ###
-    # ### Available product names of the format Test-SENSOR-Var-* can be found in
-    # ### geoips/plugins/yaml/products/integration_tests/Test-Day-Night.yaml
-    # ### geoips/plugins/yaml/products/integration_tests/Test-Day-Only.yaml
-    # ### geoips/plugins/yaml/products/integration_tests/Test-Night-Only.yaml
+    # ### More information in geoips/tests/integration_tests/test_tiny_sector_geoips.py
     ##################################################################################
     ##################################################################################
     # ### No satellite-specific test sectors in this repo, as those are included in the
