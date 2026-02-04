@@ -10,7 +10,6 @@ import logging
 # Installed Libraries
 import numpy as np
 
-
 # from .synthetic_green import synthetic_green
 
 log = logging.getLogger(__name__)
