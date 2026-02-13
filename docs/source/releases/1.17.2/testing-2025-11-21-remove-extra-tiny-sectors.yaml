@@ -1,0 +1,44 @@
+testing:
+  - title: Remove extra tiny sectors
+    description: |
+      Now only creating a single tiny sector per dataset.  Only a single dataset per
+      geostationary satellite has the full suite of tiny sectors (day, night, terminator,
+      day edge, night edge, edge, nadir, landocean, full disk), which will live in the
+      geoips repo.  All other datasets will have only a single tiny sector - terminator
+      if it exists, day only if daytime data exists, or night only if nighttime data
+      exists.
+
+      Removed from geeocolor/plugins/yaml/sectors, as well as the calls from the
+      pytest script.  Also updated pytest script with informative comments to match
+      updates in geoips repo.
+    files:
+      added:
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes16_eqc_10km_terminator_20240920T1500Z_Test-ABI-B13-Day-Night/20240920.150020.goes-16.abi.Test-ABI-B13-Day-Night.test_goes16_eqc_10km_terminator_20240920T1500Z.100p00.noaa.10p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_10km_terminator_20240924T1500Z_Test-ABI-B13-Day-Night/20240924.150021.goes-18.abi.Test-ABI-B13-Day-Night.test_goes18_eqc_10km_terminator_20240924T1500Z.100p00.noaa.10p0.png"
+      deleted:
+        - "geocolor/plugins/yaml/sectors/integration_tests/goes_east_sectors/goes16_20240920T1500Z/test_goes16_eqc_10km_edge_day_20240920T1500Z.yaml"
+        - "geocolor/plugins/yaml/sectors/integration_tests/goes_east_sectors/goes16_20240920T1500Z/test_goes16_eqc_10km_edge_night_20240920T1500Z.yaml"
+        - "geocolor/plugins/yaml/sectors/integration_tests/goes_east_sectors/goes16_20240920T1500Z/test_goes16_eqc_3km_day_20240920T1500Z.yaml"
+        - "geocolor/plugins/yaml/sectors/integration_tests/goes_east_sectors/goes16_20240920T1500Z/test_goes16_eqc_3km_night_20240920T1500Z.yaml"
+        - "geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_10km_edge_day_20240924T1500Z.yaml"
+        - "geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_10km_edge_night_20240924T1500Z.yaml"
+        - "geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_3km_day_20240924T1500Z.yaml"
+        - "geocolor/plugins/yaml/sectors/integration_tests/goes_west_sectors/goes18_20240924T1500Z/test_goes18_eqc_3km_night_20240924T1500Z.yaml"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes16_eqc_10km_edge_day_20240920T1500Z_GeoColor/20240920.150020.goes-16.abi.GeoColor.test_goes16_eqc_10km_edge_day_20240920T1500Z.97p47.noaa.10p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes16_eqc_10km_edge_night_20240920T1500Z_GeoColor/20240920.150020.goes-16.abi.GeoColor.testgoes16_eqc_10km_edge_night_20240920T1500Z.70p07.noaa.10p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes16_eqc_10km_terminator_20240920T1500Z_GeoColor/20240920.150020.goes-16.abi.GeoColor.testgoes16_eqc_10km_terminator_20240920T1500Z.100p00.noaa.10p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes16_eqc_3km_day_20240920T1500Z_GeoColor/20240920.150020.goes-16.abi.GeoColor.testgoes16_eqc_3km_day_20240920T1500Z.100p00.noaa.3p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes16_eqc_3km_night_20240920T1500Z_GeoColor/20240920.150020.goes-16.abi.GeoColor.test_goes16_eqc_3km_night_20240920T1500Z.100p00.noaa.3p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_10km_edge_day_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_edge_day_20240924T1500Z.89p37.noaa.10p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_10km_edge_night_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_edge_night_20240924T1500Z.78p97.noaa.10p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_10km_edge_night_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_edge_night_20240924T1500Z.89p37.noaa.10p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_10km_terminator_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_terminator_20240924T1500Z.100p00.noaa.10p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_3km_day_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_3km_day_20240924T1500Z.100p00.noaa.3p0.png"
+        - "tests/integration_tests/tiny_sectors/outputs/test_goes18_eqc_3km_night_20240924T1500Z_GeoColor/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_3km_night_20240924T1500Z.100p00.noaa.3p0.png"
+      modified:
+        - "tests/integration_tests/test_tiny_sectors_geocolor.py"
+    date:
+      start: 2025-11-21
+      finish: 2025-11-21
+    related-issue:
+      internal: geoips#959 - 1.17.2 updates
