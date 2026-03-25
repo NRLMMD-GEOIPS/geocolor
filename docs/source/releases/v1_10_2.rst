@@ -20,7 +20,7 @@ Version 1.10.2 (2023-06-10)
 
   * Update setuptools_scm to write to _version.py
   * Replace setup.py with pyproject.toml
-  * Simplify setup.sh to only install gdeck archive
+  * Simplify setup.sh to only install deck archive
   * Update to standard .gitignore
   * Update to standard README.md
 * Finalize test_all.sh - check_code, and $GEOIPS checks
