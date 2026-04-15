@@ -80,7 +80,8 @@ tiny_sector_integ_test_calls = [
     # Tiny sector for GOES-16 terminator 10km, regular B14 Infrared channel not in this
     # dataset (only Ch1, 2, 3, 7, 13)
     (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
+        "$GEOIPS_PACKAGES_DIR/geoips/tests/integration_tests/tiny_sectors/"
+        "tiny_sectors_geostationary.sh "
         "test_goes18_eqc_10km_terminator_20240924T1500Z "
         "abi_netcdf "
         "Test-ABI-B13-Day-Only "
@@ -90,7 +91,8 @@ tiny_sector_integ_test_calls = [
     # Tiny sector for GOES-16 terminator 10km, regular B14 Infrared channel not in this
     # dataset (only Ch1, 2, 3, 7, 13)
     (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
+        "$GEOIPS_PACKAGES_DIR/geoips/tests/integration_tests/tiny_sectors/"
+        "tiny_sectors_geostationary.sh "
         "test_goes16_eqc_10km_terminator_20240920T1500Z "
         "abi_netcdf "
         "Test-ABI-B13-Day-Only "
@@ -99,7 +101,8 @@ tiny_sector_integ_test_calls = [
     ),
     # Tiny sectors for himawari-9 3km night only
     (
-        "$GEOIPS/tests/integration_tests/tiny_sectors/tiny_sectors_geostationary.sh "
+        "$GEOIPS_PACKAGES_DIR/geoips/tests/integration_tests/tiny_sectors/"
+        "tiny_sectors_geostationary.sh "
         "test_himawari9_eqc_3km_night_20240924T1500Z "
         "ahi_hsd "
         "Test-AHI-B13-Night-Only "
