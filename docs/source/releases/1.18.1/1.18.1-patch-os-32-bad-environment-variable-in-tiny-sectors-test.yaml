@@ -1,0 +1,19 @@
+bug fix:
+- title: 'Replacing tiny sectors environment variable calls'
+  description: |
+    Tiny Sectors Integration test erroneously references `$GEOIPS` environment variable. Replace the call to `$GEOIPS` with a call to `$GEOIPS_PACKAGES_DIR/geoips`.
+  files:
+    deleted:
+    - ''
+    moved:
+    - ''
+    added:
+    - 'docs/source/releases/latest/32-bad-environment-variable-in-tiny-sectors-test.yaml'
+    modified:
+    - 'tests/integration_tests/test_tiny_sectors_geocolor.py'
+  related-issue:
+    number: 32
+    repo_url: 'https://github.com/NRLMMD-GEOIPS/geocolor'
+  date:
+    start: 2026/04/15
+    finish: 2026/04/15
