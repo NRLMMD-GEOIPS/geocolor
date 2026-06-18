@@ -1,0 +1,18 @@
+testing:
+- title: Update geocolor image outputs for solar azimuth angle corrections.
+  description: |
+    Geostationary geolocation fixes for azimuth angles improved contrast in GeoColor
+    imagery.  Image outputs had not yet been updated for the fix.
+  files:
+    modified:
+    - 'tests/outputs/abi_goes_west/GeoColor_image/20240924.150021.goes-18.abi.GeoColor.test_goes18_eqc_10km_terminator_20240924T1500Z.100p00.noaa.10p0.png'
+    - 'tests/outputs/abi_goes_east/GeoColor_image/20240920.150020.goes-16.abi.GeoColor.test_goes16_eqc_10km_terminator_20240920T1500Z.74p12.noaa.10p0.png'
+    deleted:
+    - ''
+    moved:
+    - ''
+  related-issue:
+    internal: geoips#1067 - 1.19.0 updates
+  date:
+    start: 2026-06-01
+    finish: 2026-06-01
