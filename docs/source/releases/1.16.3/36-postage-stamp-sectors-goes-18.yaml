@@ -53,7 +53,7 @@ testing:
     modified:
     - ''
   related-issue:
-    internal: "GEOIPS/geocolor#36"
+    internal: "geocolor#36"
   date:
     start: 2025-10-06
     finish: 2025-10-09

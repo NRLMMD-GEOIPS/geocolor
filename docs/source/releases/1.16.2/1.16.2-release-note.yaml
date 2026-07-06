@@ -14,4 +14,4 @@ documentation:
     start: 2025-07-14
     finish: 2025-07-14
   related-issue:
-    internal: GEOIPS#861 - 1.16.2 updates
+    internal: geoips#861 - 1.16.2 updates
